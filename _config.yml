@@ -9,7 +9,7 @@ permalink: blog/:title/
 highlighter: rouge
 gems: [jekyll-paginate]
 paginate: 5
-pygments: true
+
 
 navigation:
  - title: Home
