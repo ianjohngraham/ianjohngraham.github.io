@@ -1,25 +1,60 @@
 ---
 layout: post
-title:  "Test Post"
-date:   2014-12-10
+title:  "Switching Sitecore Pipeline Processors"
+date:   2016-29-03
 ---
 
-<p class="intro"><span class="dropcap">L</span>orem ipsum thor smash liege-bastogne-liege landbouwkrediet ombregt krabbe, rouleur derby is for lovers bonk giro gilbert bidon. Driedaagse de panne-koksijde monte paschi eroica, nevele gimondi berendries off the back cassette tenbosse.</p>
+<p class="intro"><span class="dropcap">O</span>ften when embarking on a new Sitecore project you don't always get the luxury of a fresh new instance and you have to make your code fit with whatever customisations have been inflicted upon a solution. These customisations often occur in pipeline processors. By default the code in processors runs for every request and for every site. This means bad news for a multi tenanted Sitecore solution.
+</p>
 
-Bahamontes lanterne rouge normandie belgium. Fred paris-nice arrivere, for omnium commissaire ronde van vlaanderen horizontally stiff but vertically compliant muur, valkenberg jens paris-roubaix. Meyrueis belleville cavendish bianchi, rochefort echelon in soigneur ten dam omloop het volk, bettini aerts! Tour de mont aigoual cat among the pigeons rekelberg omloop het nieuwsblad paris-nice, dwars door vlaanderen coppi the colnago knockteberg anduze.
+Being able to turn these processors on and off or run a different implementation per site becomes helpful when housing completely different solutions in one instance. Here's an example..
 
-Kaperij lanterne rouge musette rund um koln bruges thor smash, geraardsbergen riis petacchi molteni pedaling squares. Virenque vande velde, valkenberg gutter pantani parcours gaul domestique, tilford campagnolo around madone. Bruyneel criterium ritte, gorgeous george the trousselier feed zone bruges nokere koerse, parcours gilbert garin? Anquetil valkenberg bettini cat among the pigeons.
+<strong>Mean Beans</strong>
+In this example I'll use the fictional company called Mean Beans group. They sell their canned beans all over the world, but as a group they consist of very different businesses. For example in the UK and France they only sell original Mean Beans but in the U.S they only sell beans with sausages, technically the European businesses and the U.S business use very different content and they both can be described as different brands.
 
-Campagnolo the hors delai de wolf as the toto turns venga venga venga, sanchez nys. Pantani hell of the north oude kwaremont nitto koppenberg, tiegemberg van steenbergen lombardie flamme rouge lemond e3 prijs vlaanderen.
+The UK and French sites have been established for many years and they are set up in sitecore with a few customisations. But now the board members of Mean beans international want the US site to fit inside the existing Sitecore instance, but they want the new site to use standard Sitecore functionality. Time to do some investigation to see if this is possible..
 
-Planckaert berg ter stene freire gorgeous george in rouleur derby, vaughters fabianese omloop het volk rouleur play rouleur derby. Bottechia petacchi, milan-san remo van summeren off the back cutters the cassette.
+The first customisation that we can see in the site is the <em>StripLanguage</em> processor.
+
+<script src="https://gist.github.com/ianjohngraham/8efe0cc90370c4ed246e.js"></script>
+
+Ok, so how do we go about making this work? We can't just turn off this processor as Sitecore needs this in order for language embedding to work.
+
+Putting a load of if statements in our code would be a bad idea as well. Ideally we need to provide an implmentation of the processor for each brand.
+
+So how do we set this up? We can simply put some mappings in our config when declaring the processor.
+
+<script src="https://gist.github.com/ianjohngraham/66ffbcd04a93abd94362.js"></script>
+
+<strong>Processor Parameters</strong>
+A cool feature of pipeline processors is that you can pass parameters to them in config. To make this work you simply need to add a method to your processor to parse the xml parameters.
+
+<script src="https://gist.github.com/ianjohngraham/5763bccbf33ad234aa95.js"></script>
+
+The method to do the parsing is specified in the config on the <em>raw:AddBrandMapping </em> <em>hint</em> attribute.
+
+However we need to identify when a user is requesting the U.S site or the UK site. In our Sitecore site configuration elements we can add a new <em>brand</em> property to the each site's node to identify which brand the site belongs to.
+
+<script src="https://gist.github.com/ianjohngraham/1aa398b857151632e0dc.js"></script>
+
+You can add custom properties to these config nodes and then read them using the <em>SiteInfo</em> class.
+
+<script src="https://gist.github.com/ianjohngraham/5f9b2d0c0b1752b47145.js"></script>
+
+Now we need some code to check the site the current user is requesting. A processor checker class will handle this and return a <em>SiteInfo</em> object. If the request has a Sitecore Context then return the Context site's <em>SiteInfo</em> otherwise do a match on the request's hostname and the hostname specified in the Site's Site node.
+
+<script src="https://gist.github.com/ianjohngraham/3db1f534086b63726690.js"></script>
+
+Once we know what site is being requested and have all the mappings set up it's simply a case of reading the values from the mappings and invoking the appropriate processor.
+
+The full switcher class now looks something like this.
+
+<script src="https://gist.github.com/ianjohngraham/68c6e6bc93e452041dde.js"></script>
+
+With this all in place the European sites and U.S site can continue to function side by side and have different URL treatments and not affect each other.
+
+The configuration on the processors makes it easy to add new set ups for new brands in the future and makes for quite an elegant solution.
+
+Hope this restores calm to someone dealing with multi site chaos! Until next time.
 
 
-```c#
-public class
-{
-   var test = "4";
-}
-```
-
-Nyvelocity pyrenees vande velde merckx. La fleche wallonne fixie pau, with muur hors categorie boonen aerts operacion puerto, topsport vlaanderen pereiro randonneur. This greek text is produced by rouleur derby, almost certainly the best fantasy cycling game in the world snob trousselier col du galibier, flanders venga venga venga suitcase of courage cutters kolobnev molenberg.
