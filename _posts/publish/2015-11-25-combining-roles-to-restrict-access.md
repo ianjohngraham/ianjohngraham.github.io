@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "Combining roles to restrict access in Sitecore"
 date: 2015-11-25 12:50
