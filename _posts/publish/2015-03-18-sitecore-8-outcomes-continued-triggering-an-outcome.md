@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore, Sitecore 8]
 tags: []
 ---
-This post is a quick follow-on from my previous post <a href="http://coreblimey.azurewebsites.net/sitecore-8-outcomes/" title="Thoughts on Sitecore 8 Outcomes" target="_new">Thoughts on Sitecore Outcomes</a>.
+<span class="dropcap">T</span>his post is a quick follow-on from my previous post <a href="http://coreblimey.azurewebsites.net/sitecore-8-outcomes/" title="Thoughts on Sitecore 8 Outcomes" target="_new">Thoughts on Sitecore Outcomes</a>.
 
 As I stated in my previous post, there is currently no way for marketers to trigger an Outcome in Sitecore the same way as you would a Goal. There are no actions in the Rules Engine or an interface to assign an Outcome result to a page.
 

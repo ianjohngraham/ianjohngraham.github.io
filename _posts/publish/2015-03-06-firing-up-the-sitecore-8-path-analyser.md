@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore, Sitecore 8]
 tags: []
 ---
-Ever since I installed the first version of Sitecore 8  I've been intrigued by the new Path Analyzer section, but I've  never really understood how to get it working. With the release of Sitecore 8 update2 I took the time to do some further investigation.
+<span class="dropcap">E</span>ver since I installed the first version of Sitecore 8  I've been intrigued by the new Path Analyzer section, but I've  never really understood how to get it working. With the release of Sitecore 8 update2 I took the time to do some further investigation.
 
 
 ## So what does the Path Analyzer do?

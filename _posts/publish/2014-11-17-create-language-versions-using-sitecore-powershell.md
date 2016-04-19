@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore]
 tags: [Powershell, Sitecore]
 ---
-A few months ago I was working on a global site that needed 10 different language versions of content. The site was completed in the English master version and some basic training was given to content authors in using Page Editor. There was just one problem: how could I create all the language versions of the content so the content authors could start using Page Editor to localise content?
+<span class="dropcap">A</span> few months ago I was working on a global site that needed 10 different language versions of content. The site was completed in the English master version and some basic training was given to content authors in using Page Editor. There was just one problem: how could I create all the language versions of the content so the content authors could start using Page Editor to localise content?
 
 **Manually Add New Versions**
 

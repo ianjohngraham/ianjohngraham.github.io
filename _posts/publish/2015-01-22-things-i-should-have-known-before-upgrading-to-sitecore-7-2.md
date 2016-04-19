@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore]
 tags: [Sitecore 7, upgrading]
 ---
-It's January and it's cold.. well colder. January seems to be the time when you need to do some general house keeping/cleaning up and get things ready for the rest of the year. With this in mind, this month I've been working on upgrades to Sitecore 7.2 from 6.5. Not the most sexy of subjects so I'll keep it brief.
+<span class="dropcap">I</span>t's January and it's cold.. well colder. January seems to be the time when you need to do some general house keeping/cleaning up and get things ready for the rest of the year. With this in mind, this month I've been working on upgrades to Sitecore 7.2 from 6.5. Not the most sexy of subjects so I'll keep it brief.
 
 For the most part if you follow Sitecore's instructions the upgrade should go smoothly and the worst part of the upgrade usually occurs when going from 6.5 to 6.6. You'll spend most of you time refactoring custom code.
 

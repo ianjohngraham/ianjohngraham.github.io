@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore]
 tags: []
 ---
-Once you have the requirements from the discovery phase ([see part 1](http://coreblimey.azurewebsites.net/going-global-with-sitecore-part-1-discovery)), it's fairly likely that you'll find some customisation will need to be performed on your Sitecore instance. In my experience, the main areas of customisation concern the following parts of Sitecore:
+<span class="dropcap">O</span>nce you have the requirements from the discovery phase ([see part 1](http://coreblimey.azurewebsites.net/going-global-with-sitecore-part-1-discovery)), it's fairly likely that you'll find some customisation will need to be performed on your Sitecore instance. In my experience, the main areas of customisation concern the following parts of Sitecore:
 
 
 ## Item Provider

@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore, Sitecore 8, SPEAK]
 tags: []
 ---
-Over the past couple of months I've been fooling around with some Sitecore SPEAK components and the Experience Analytics Dashboard in Sitecore 8. With my rudimentary knowledge I set myself a challenge: to create a New Vs Returning  Visitors Pie Chart in the Experience Analytics Dashboard, much the same as the one you get out of the box with Google Analytics.
+<span class="dropcap">O</span>ver the past couple of months I've been fooling around with some Sitecore SPEAK components and the Experience Analytics Dashboard in Sitecore 8. With my rudimentary knowledge I set myself a challenge: to create a New Vs Returning  Visitors Pie Chart in the Experience Analytics Dashboard, much the same as the one you get out of the box with Google Analytics.
 
 <!--more-->
 

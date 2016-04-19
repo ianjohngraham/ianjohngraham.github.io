@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore]
 tags: [DMS, Personalisation, Search, Sitecore 7]
 ---
-Sitecore's Digital Marketing  System  (DMS) is a great suite of tools  that can enable profile matching and  personalisation within your Sitecore website. When used effectively you can really know what your website visitors are up to and act accordingly with a call-to-action or three!<!--more-->
+<span class="dropcap">S</span>itecore's Digital Marketing  System  (DMS) is a great suite of tools  that can enable profile matching and  personalisation within your Sitecore website. When used effectively you can really know what your website visitors are up to and act accordingly with a call-to-action or three!<!--more-->
 
 If you're not already familiar with it's features I'd encourage you to read up on what's involved to get it working.  To start with, you'll need some website personas and a strategy. Once you have this, the rest is relatively straight forward.
 

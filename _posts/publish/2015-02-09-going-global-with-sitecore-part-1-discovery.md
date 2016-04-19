@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore]
 tags: []
 ---
-Building a global site can be daunting, with a large number of stakeholders, different cultures and reams of content.  Fortunately Sitecore is more than up to the challenge when it comes to building global sites. With my 3rd global site now built, this series of blog posts will share what I've learned, from designing the content architecture through to handing the site over to content editors.
+<span class="dropcap">B</span>uilding a global site can be daunting, with a large number of stakeholders, different cultures and reams of content.  Fortunately Sitecore is more than up to the challenge when it comes to building global sites. With my 3rd global site now built, this series of blog posts will share what I've learned, from designing the content architecture through to handing the site over to content editors.
 
 As always in a Sitecore build, discovery is an important step in the process and it is important to ask the right questions before the content architecture is defined.
 

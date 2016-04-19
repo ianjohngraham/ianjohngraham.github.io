@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore, Sitecore 8]
 tags: [xDB]
 ---
-So you've heard the buzz around Sitecore Experience xDB and MongoDB. You may have seen some fancy demos with contact cards in the *Experience Profile* section, but just exactly how do you get all this up and running with your basic Sitecore 8 instance?
+<span class="dropcap">S</span>o you've heard the buzz around Sitecore Experience xDB and MongoDB. You may have seen some fancy demos with contact cards in the *Experience Profile* section, but just exactly how do you get all this up and running with your basic Sitecore 8 instance?
 
 Here's how in 6 steps:
 

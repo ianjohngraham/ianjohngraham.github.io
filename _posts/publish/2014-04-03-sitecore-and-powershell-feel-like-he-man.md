@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore]
 tags: [Powershell, Sitecore]
 ---
-This month I've been setting up a few scripts so that we can automate the creation of new solutions for customers and also make it easy for other developers/front-enders to start working on new projects.
+<span class="dropcap">T</span>his month I've been setting up a few scripts so that we can automate the creation of new solutions for customers and also make it easy for other developers/front-enders to start working on new projects.
 
 Powershell has been invaluable in setting up these processes and I've been amazed on a daily basis just how powerful the language can be. Your everyday mundane tasks such as renaming a group of files, finding and replacing text or even attaching databases can become automated.
 

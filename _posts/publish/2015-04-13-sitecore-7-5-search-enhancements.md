@@ -7,7 +7,7 @@ comments: true
 categories: [Search, Sitecore]
 tags: []
 ---
-In my last post I shared my experiences of using Expression Trees with Sitecore 7 search.
+<span class="dropcap">I</span>n my last post I shared my experiences of using Expression Trees with Sitecore 7 search.
 While writing the post and researching Expression Trees I found out about some new features that have been added to the search layer in Sitecore 7.5.
 
 After writing the post I spent some time trying out the new features - here's a brief overview of what I found out.

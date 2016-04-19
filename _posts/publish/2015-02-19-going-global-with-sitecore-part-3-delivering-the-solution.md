@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore]
 tags: []
 ---
-This is the final post in my series examining the subject of building global sites in Sitecore. Read <a href="http://coreblimey.azurewebsites.net/going-global-with-sitecore-part-1-discovery/" title="Going global with Sitecore, part 1: discovery">Part 1</a> and <a href="http://coreblimey.azurewebsites.net/going-global-with-sitecore-part-2-customising-the-core/" title="Going global with Sitecore, part 2: customising the core">Part 2</a>.
+<span class="dropcap">T</span>his is the final post in my series examining the subject of building global sites in Sitecore. Read <a href="http://coreblimey.azurewebsites.net/going-global-with-sitecore-part-1-discovery/" title="Going global with Sitecore, part 1: discovery">Part 1</a> and <a href="http://coreblimey.azurewebsites.net/going-global-with-sitecore-part-2-customising-the-core/" title="Going global with Sitecore, part 2: customising the core">Part 2</a>.
 
 Handing over a global site to content editors requires plenty of preparation. You need to make sure that the content editors have everything they need, from the correct level of access to the Sitecore instance through to the content set up ready for translation.
 

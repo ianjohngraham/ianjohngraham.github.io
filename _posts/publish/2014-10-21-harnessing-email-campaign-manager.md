@@ -9,7 +9,7 @@ tags: [Email Campaign Manager, Email Experience Manager]
 ---
 <style type="text/css"><!--
 .syntaxhighlighter {     width: 500px;     overflow-y: auto !important;     overflow-x: auto !important;}
---></style>Recently I was asked to build a messenger tool in Sitecore that would send emails to site users and allow select members to send messages to groups of users.
+--></style><span class="dropcap">R</span>ecently I was asked to build a messenger tool in Sitecore that would send emails to site users and allow select members to send messages to groups of users.
 
 I built the tool by harnessing Sitecore's Email Campaign Manager (ECM) functionality (now known as the Email Experience Manager) and this post highlights how to use the API for managing, sending and scheduling email.
 

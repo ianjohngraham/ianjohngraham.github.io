@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore, Sitecore 8]
 tags: []
 ---
-With the release of Sitecore 8, marketers now have a wide range of tools they can use - Experience Profile, Path analyzer, Experience Analytics -the list goes on...
+<span class="dropcap">W</span>ith the release of Sitecore 8, marketers now have a wide range of tools they can use - Experience Profile, Path analyzer, Experience Analytics -the list goes on...
 
 These tools rely on marketers having a certain level of digital maturity, and the features aren't always set up out of the box. This is why I feel there is a role for developers to start embracing these features, so that the full potential of Sitecore 8 can be realised.
 

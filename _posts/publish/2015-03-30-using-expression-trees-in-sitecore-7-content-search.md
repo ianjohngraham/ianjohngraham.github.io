@@ -7,7 +7,7 @@ comments: true
 categories: [Search, Sitecore]
 tags: []
 ---
-Recently a colleague asked me about expression trees, which jogged my memory that I needed to write a nitty gritty technical post on Sitecore 7 search.
+<span class="dropcap">R</span>ecently a colleague asked me about expression trees, which jogged my memory that I needed to write a nitty gritty technical post on Sitecore 7 search.
 
 If you've been using Sitecore 7 Search you'll have used the new Linq style predicates to construct queries. The switch over to Linq style query language has been well received by developers and we are now able to use patterns that are familiar to us such as *IQueryable* and Predicates.
 

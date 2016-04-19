@@ -7,7 +7,7 @@ comments: true
 categories: [Search, Sitecore]
 tags: [Lucene, Sitecore, Sitecore 7, Solr]
 ---
-If you've used Sitecore 7 search with the Solr provider  you may know that suggestive search functionality comes pretty much out-of-the-box. However if you're using the Lucene provider there's a bit more work to be done. Here's how.
+<span class="dropcap">I</span>f you've used Sitecore 7 search with the Solr provider  you may know that suggestive search functionality comes pretty much out-of-the-box. However if you're using the Lucene provider there's a bit more work to be done. Here's how.
 
 
 ### The Solr way

@@ -7,7 +7,7 @@ comments: true
 categories: [DMS, Sitecore, Sitecore 8]
 tags: []
 ---
-If you've been using Sitecore 7.5 onwards you'll have noticed that Sitecore is now the Experience Platform and there are a new plethora of features for marketers.
+<span class="dropcap">I</span>f you've been using Sitecore 7.5 onwards you'll have noticed that Sitecore is now the Experience Platform and there are a new plethora of features for marketers.
 In this transition to a marketing focused platform DMS also got a rebrand.
 <!-- more -->
 

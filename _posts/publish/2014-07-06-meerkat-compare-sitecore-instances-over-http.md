@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore]
 tags: []
 ---
-When working on Sitecore projects I've often found it cumbersome working with Sitecore items and keeping various instances in sync.
+<span class="dropcap">W</span>hen working on Sitecore projects I've often found it cumbersome working with Sitecore items and keeping various instances in sync.
 
 We have various tools and source control to facilitate continous delivery of our system centric Sitecore items, but there are still times when we have to manually push content centric Sitecore items between instances.
 

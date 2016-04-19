@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore]
 tags: []
 ---
-I was using Visual Studio's scope to this functionality the other day and had a thought - what if I could do this in Sitecore? What if I could narrow down to a section of the Content Editor tree to where I was working at that time and put aside everything else in the tree. Surely I would be more relaxed and in a zen-like state?
+<span class="dropcap">I</span> was using Visual Studio's scope to this functionality the other day and had a thought - what if I could do this in Sitecore? What if I could narrow down to a section of the Content Editor tree to where I was working at that time and put aside everything else in the tree. Surely I would be more relaxed and in a zen-like state?
 <!--more-->
 
 Well, not exactly, but I had fun doing it and learned a bit about the content editor and some core bits of Sitecore.

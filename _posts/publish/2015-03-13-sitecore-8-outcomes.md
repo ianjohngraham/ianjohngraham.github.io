@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore, Sitecore 8]
 tags: []
 ---
-A new feature in Sitecore 8 which has been puzzling me recently is the new Outcomes section in the Marketing Control Panel.
+<span class="dropcap">A</span> new feature in Sitecore 8 which has been puzzling me recently is the new Outcomes section in the Marketing Control Panel.
 
 If you open up the item in Sitecore you can see there's only a few basic fields such as image and description. So what is this mystery new marketing tool for?
 
