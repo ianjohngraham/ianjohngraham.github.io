@@ -7,6 +7,7 @@ GLOBAL STYLES
 	position: relative;
 	z-index: 1;
 
+
 	&:after {
 		z-index: -1; 
 		background: white;
@@ -29,6 +30,18 @@ GLOBAL STYLES
 .container {
 	@include container(800px); 
 	padding: 0;
+
+}
+
+.side-bar {
+
+    float:right;
+    position: relative;
+    border: 1px solid red;
+    width: 269px;
+    top: 10px;
+    vertical-align:top;
+
 }
 
 
@@ -89,7 +102,7 @@ HEADER STYLING
 
 				a {
 					color: white;
-					font-size: .9em;
+					font-size: 2em;
 					text-decoration: none;
 					padding: 0 .25em;
 
@@ -139,7 +152,7 @@ POST STYLING
 
 .post {
 	h1, h2, h3, h4, h5, h6, p, ul, ol, dl, .pageTitle {
-		@include span(9 of 12); 
+		/*/@include span(9 of 12); */
 		float: none;
 		margin: 0 auto 2rem; 
 	}

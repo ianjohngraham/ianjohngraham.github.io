@@ -1,4 +1,4 @@
-title: Coreblimey - Sitecore Blog   
+title: Coreblimey! - Sitecore Blog   
 description: Sitecore Development Blog  
 
 url: http://ianjohngraham.github.io
@@ -23,3 +23,6 @@ social:
    twitter: ianjohngraham
 
 google_analytics: "UA-58263416-1"
+
+sass:
+        sass_dir: _sass
