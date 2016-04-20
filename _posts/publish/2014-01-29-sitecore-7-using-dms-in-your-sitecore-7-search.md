@@ -18,7 +18,10 @@ Since the evolution of Sitecore to version 7 there is now  an easier way to do 
 So, I've put together some rough-and- ready sample code  below using computed index fields, that checks an item has DMS tracking and has profile keys assigned, and adds a list of strings representing categories to the search index.
 
 
-using Sitecore.Analytics.Configuration;
+
+``` csharp
+
+    using Sitecore.Analytics.Configuration;
     using Sitecore.Analytics.Data;
     using Sitecore.ContentSearch;
     using Sitecore.ContentSearch.ComputedFields;
@@ -56,7 +59,7 @@ using Sitecore.Analytics.Configuration;
                     Field field = item.Fields[Constants.DMSFields.Tracking];
                     if (field != null)
                     {
-                        List&lt;string&gt; strs = new List&lt;string&gt;();
+                        List<string> strs = new List<string>();
                         ContentProfile[] profiles = (new TrackingField(field)).Profiles;
                         if (profiles != null)
                         {
@@ -64,10 +67,10 @@ using Sitecore.Analytics.Configuration;
                             {  
                                 // Get Profile Keys assigned
                                 var listKeys = GetKeys((new TrackingField(field)), profile, 1);
-                                if (listKeys.Count() &gt; 0)
+                                if (listKeys.Count() > 0)
                                 {
                                     strs.AddRange((from l in listKeys
-                                                   select l.InnerItem[&quot;name&quot;]).ToList());
+                                                   select l.InnerItem["name"]).ToList());
     
                                 }
                             }
@@ -76,16 +79,16 @@ using Sitecore.Analytics.Configuration;
                         }                  
                     }
                 }
-                return new List&lt;string&gt;();
+                return new List<string>();
             }
     
-            public static IEnumerable&lt;ContentProfileKeyData&gt; GetKeys(TrackingField trackingField, ContentProfile profile, int minimumScore)
+            public static IEnumerable<ContentProfileKeyData> GetKeys(TrackingField trackingField, ContentProfile profile, int minimumScore)
             {
-                var matchedKeys = new List&lt;ContentProfileKeyData&gt;();
+                var matchedKeys = new List<ContentProfileKeyData>();
     
                 foreach (ContentProfileKeyData profileKey in profile.Keys)
                 {
-                    if (profileKey.Value &gt;= minimumScore)
+                    if (profileKey.Value >= minimumScore)
                     {
                         matchedKeys.Add(profileKey);
                     }
@@ -94,9 +97,16 @@ using Sitecore.Analytics.Configuration;
             }
     
         }
-    }</pre>
-    To get this to run, all you have to do is find the Computed Index Fields section in the indexes.config file, specify the  assembly and type of the ComputedIndex field code and jobs a good'un.  Then when you push an item into your search index, the computed field code will run and create a special field with your DMS categories.
-    <pre class="brush: xml; gutter: true"> &lt;field fieldName=&quot;dmscategories&quot; returnType=&quot;stringCollection&quot;&gt;Coreblimey.Business.Search.ComputedFields.DMSComputedField,Coreblimey.Business&lt;/field&gt;
+    }
+
+```
+
+To get this to run, all you have to do is find the Computed Index Fields section in the indexes.config file, specify the  assembly and type of the ComputedIndex field code and jobs a good'un.  Then when you push an item into your search index, the computed field code will run and create a special field with your DMS categories.
+
+``` xml
+
+ <field fieldName="dmscategories" returnType="stringCollection">Coreblimey.Business.Search.ComputedFields.DMSComputedField,Coreblimey.Business</field>
+```
 
 With the content in the index, you can now unleash the power of Sitecore 7 search to allow searching  by DMS category and use current real time DMS data in tandem with indexed data to produce personalised, relevant content to your website users.
 

@@ -24,25 +24,24 @@ If you're lucky enough to still have some xslts in your solution, now might be a
 
 Here's the fix you'll need:
 
-
+``` csharp
 public class GetTextFieldValue
     {
         // Methods
         public void Process(RenderFieldArgs args)
         {
-            Assert.ArgumentNotNull(args, &quot;args&quot;);
+            Assert.ArgumentNotNull(args, "args");
             switch (args.FieldTypeKey)
             {
-                case &quot;text&quot;:
-                case &quot;single-line text&quot;:
-                    args.WebEditParameters.Add(&quot;prevent-line-break&quot;, &quot;true&quot;);
+                case "text":
+                case "single-line text":
+                    args.WebEditParameters.Add("prevent-line-break", "true");
                     //args.Result.FirstPart = HttpUtility.HtmlEncode(args.Result.FirstPart);
                     break;
             }
         }
     }
-
-
+```
 
 
 **Make the most of Sitecore 7 Search**

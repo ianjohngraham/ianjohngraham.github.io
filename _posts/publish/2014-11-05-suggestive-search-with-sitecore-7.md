@@ -34,7 +34,9 @@ For this example I've setup a WCF service but you could also setup a Restful Web
 The service will have one method that will accept the term and return a list of suggestions based on the term.
 
 
-using System;
+``` csharp
+
+    using System;
     using System.Collections.Generic;
     using System.ServiceModel;
     using System.ServiceModel.Web;
@@ -46,15 +48,20 @@ using System;
       public interface ISearch
       {
         [OperationContract]
-        [WebInvoke(Method = &quot;GET&quot;,BodyStyle =    WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
-        [return: MessageParameter(Name = &quot;suggestions&quot;)]
-        List&lt;AutoCompleteSuggestion&gt; AutoCompleteTerm()
+        [WebInvoke(Method = "GET",BodyStyle =    WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+        [return: MessageParameter(Name = "suggestions")]
+        List<AutoCompleteSuggestion> AutoCompleteTerm()
       }
-    }</pre>
-    The magic that makes the auto suggest work is the *GetTermsByFieldName* method that is part of the Sitecore.ContentSearch.IProviderSearchContext.
+    }
+```
+
+The magic that makes the auto suggest work is the *GetTermsByFieldName* method that is part of the Sitecore.ContentSearch.IProviderSearchContext.
     
-    The method allows you to specify the prefix of the word and the field name you are searching on and it will squirt out results based on the criteria.
-    <pre class="brush: csharp; gutter: false">using System;
+The method allows you to specify the prefix of the word and the field name you are searching on and it will squirt out results based on the criteria.
+
+
+``` csharp
+    using System;
     using System;
     using System.Collections.Generic;
     using System.ServiceModel.Activation;
@@ -66,9 +73,9 @@ using System;
        [AspNetCompatibilityRequirements(RequirementsMode =AspNetCompatibilityRequirementsMode.Allowed)]
        public class Search : ISearch
        {
-         public List&lt;AutoCompleteSuggestion&gt; AutoCompleteTerm()
+         public List<AutoCompleteSuggestion> AutoCompleteTerm()
          {
-           var list = new List&lt;AutoCompleteSuggestion&gt;();
+           var list = new List<AutoCompleteSuggestion>();
            if (WebOperationContext.Current == null)
                return list;
     
@@ -77,12 +84,12 @@ using System;
            if (String.IsNullOrEmpty(term))
             return list;
     
-           var index = Sitecore.ContentSearch.ContentSearchManager.GetIndex(Sitecore.Configuration.Settings.GetSetting(&quot;SearchIndex.Index&quot;));
+           var index = Sitecore.ContentSearch.ContentSearchManager.GetIndex(Sitecore.Configuration.Settings.GetSetting("SearchIndex.Index"));
     
            using (var context = index.CreateSearchContext())
            {
              // You need to specifiy the field name as it is stored in the index 
-             var suggestions =  context.GetTermsByFieldName(&quot;navigation_title&quot;, term);
+             var suggestions =  context.GetTermsByFieldName("navigation_title", term);
              foreach (var suggestion in suggestions)
              {
                list.Add(new AutoCompleteSuggestion { Suggestion = suggestion.Term});
@@ -91,9 +98,15 @@ using System;
          }
          return list;
        }
-     }</pre>
-    &nbsp;
-    <pre class="brush: csharp; gutter: false">using System;
+     }
+```
+
+  &nbsp;
+
+
+``` csharp
+
+    using System;
     using System.Runtime.Serialization;
     
     namespace Coreblimey.Entities.Search
@@ -101,25 +114,35 @@ using System;
         [DataContract]
         public class AutoCompleteSuggestion
         {
-            [DataMember(Name=&quot;suggestion&quot;)]
+            [DataMember(Name="suggestion")]
             public String Suggestion { get; set; }
         }
-    }</pre>
-    Make sure you've registered an endpoint in your web.config
-    <pre class="brush: xhtml; gutter: false">....
-      &lt;services&gt;
-          &lt;service behaviorConfiguration=&quot;Coreblimey.WebApplication.Services.SearchServiceBehavior&quot; name=&quot;Coreblimey.WebApplication.Services.Search&quot;&gt;
-            &lt;endpoint address=&quot;&quot; behaviorConfiguration=&quot;restBehavior&quot; binding=&quot;webHttpBinding&quot; contract=&quot;Coreblimey.WebApplication.Services.ISearch&quot; /&gt;
-          &lt;/service&gt;
-        &lt;/services&gt;
-      &lt;/system.serviceModel&gt;</pre>
-    And you'll want to add .svc to the list of allowed extensions in your web.config so that Sitecore will not interupt any requests.
-    <pre class="brush: xhtml; gutter: true">  &lt;processor type=&quot;Sitecore.Pipelines.PreprocessRequest.FilterUrlExtensions, Sitecore.Kernel&quot;&gt;
-              &lt;param desc=&quot;Allowed extensions (comma separated)&quot;&gt;aspx, ashx, asmx, svc&lt;/param&gt;
-              &lt;param desc=&quot;Blocked extensions (comma separated)&quot;&gt;*&lt;/param&gt;
-              &lt;param desc=&quot;Blocked extensions that stream files (comma separated)&quot;&gt;*&lt;/param&gt;
-              &lt;param desc=&quot;Blocked extensions that do not stream files (comma separated)&quot; /&gt;
-            &lt;/processor&gt;
+    }
+```
+
+Make sure you've registered an endpoint in your web.config
+  ....
+
+``` xml
+      <services>
+          <service behaviorConfiguration="Coreblimey.WebApplication.Services.SearchServiceBehavior" name="Coreblimey.WebApplication.Services.Search">
+            <endpoint address="" behaviorConfiguration="restBehavior" binding="webHttpBinding" contract="Coreblimey.WebApplication.Services.ISearch" />
+          </service>
+        </services>
+      </system.serviceModel>
+```
+
+And you'll want to add .svc to the list of allowed extensions in your web.config so that Sitecore will not interupt any requests.
+
+``` xml
+           <processor type="Sitecore.Pipelines.PreprocessRequest.FilterUrlExtensions, Sitecore.Kernel">
+              <param desc="Allowed extensions (comma separated)">aspx, ashx, asmx, svc</param>
+              <param desc="Blocked extensions (comma separated)">*</param>
+              <param desc="Blocked extensions that stream files (comma separated)">*</param>
+              <param desc="Blocked extensions that do not stream files (comma separated)" />
+            </processor>
+
+```
 
 &nbsp;
 

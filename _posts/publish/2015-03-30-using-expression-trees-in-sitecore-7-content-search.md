@@ -32,7 +32,7 @@ The solution? Use expression trees.
 
 According to Microsoft:
 
-*"Expression trees represent code in a tree-like data structure, where each node is an expression, for example, a method call or a binary operation such as x &lt; y.
+*"Expression trees represent code in a tree-like data structure, where each node is an expression, for example, a method call or a binary operation such as x < y.
 You can compile and run code represented by expression trees. This enables dynamic modification of executable code, the execution of LINQ queries in various databases, and the creation of dynamic queries"*
 
 So they offer a dynamic way to construct a lambda expression that you can add in place of a Linq predicate. More info here:
@@ -51,23 +51,29 @@ The filters could perform either an exact match search or a contains search or a
 
 I already had some classes to store the filter criteria and the predicate
 
+ 
 
-var predicate = PredicateBuilder.True();
+``` csharp
+    var predicate = PredicateBuilder.True();
     
     // Go through filters and get predicates
     foreach (var itemFilter in criteria.Filters)
     {
       //TODO dynamically add predicates to the predicate builder
-    }
-    
-    /////</pre>
-    
-    
-    ### The code
+    } 
+
+```
     
     
-    The classes for the filters were *ExactMatchFilter* and *RangeFilter* which both implement *IItemFilter*. I refactored each of the classes to include an *AppendPredicate* method that would return an expression tree.
-    <pre class="brush: csharp; gutter: true">public class ExactMatchFilter : IItemFilter
+## The code
+    
+    
+The classes for the filters were *ExactMatchFilter* and *RangeFilter* which both implement *IItemFilter*. I refactored each of the classes to include an *AppendPredicate* method that would return an expression tree.
+    
+
+``` csharp
+
+    public class ExactMatchFilter : IItemFilter
     {
        private string _value;
        private string _field;
@@ -80,7 +86,7 @@ var predicate = PredicateBuilder.True();
          _partial = partial;
        }
     
-      public Expression&lt;Func&lt;CustomResultItem,  bool&gt;&gt;AppendPredicate(Expression&lt;Func&lt;CustomResultItem, bool&gt;&gt; predicate)
+      public Expression<Func<CustomResultItem,  bool>>AppendPredicate(Expression<Func<CustomResultItem, bool>> predicate)
       {
         if (!_partial)
         {
@@ -104,17 +110,22 @@ var predicate = PredicateBuilder.True();
          _field = field;
        }
     
-       public Expression&lt;Func&lt;CustomResultItem, bool&gt;&gt;    AppendPredicate(Expression&lt;Func&lt;CustomResultItem, bool&gt;&gt; predicate)
+       public Expression<Func<CustomResultItem, bool>>    AppendPredicate(Expression<Func<CustomResultItem, bool>> predicate)
        {
           return ExpressionMatches.RangeMin(_field, _min).And(ExpressionMatches.RangeMax(_field, _max));
        }
-    }</pre>
-    &nbsp;
+    }
+```
+
+
+This next class is a utility class that actually builds the expression tree. It builds the trees for the methods: equals, contains and greater than or equal.
     
-    This next class is a utility class that actually builds the expression tree. It builds the trees for the methods: equals, contains and greater than or equal.
-    
-    Getting the this code to work took me a while as expression trees are not the most intuitive! Here goes!!
-    <pre class="brush: csharp; gutter: true">using System;
+Getting the this code to work took me a while as expression trees are not the most intuitive! Here goes!!
+
+
+``` csharp
+
+    using System;
     using System.Linq.Expressions;
     using System.Reflection;
     
@@ -125,78 +136,83 @@ var predicate = PredicateBuilder.True();
     
      public class ExpressionMatches
      {
-        public static Expression&lt;Func&lt;CustomResultItem, bool&gt;&gt; Contains(string key, string value)
+        public static Expression<Func<CustomResultItem, bool>> Contains(string key, string value)
         {
            key = NormaliseKey(key);
            value = NormaliseGuid(value);
            return GetExpression(key, value);
         }
     
-        static Expression&lt;Func&lt;T, bool&gt;&gt; GetExpression(string propertyName, string propertyValue)
+        static Expression<Func<T, bool>> GetExpression(string propertyName, string propertyValue)
         {
-           var parameterExp = Expression.Parameter(typeof(T), &quot;type&quot;);
+           var parameterExp = Expression.Parameter(typeof(T), "type");
            var propertyExp = Expression.Property(parameterExp, propertyName);
-           MethodInfo method = typeof(string).GetMethod(&quot;Contains&quot;, new[] { typeof(string) });
+           MethodInfo method = typeof(string).GetMethod("Contains", new[] { typeof(string) });
            var someValue = Expression.Constant(propertyValue, typeof(string));
            var containsMethodExp = Expression.Call(propertyExp, method, someValue);
-           return Expression.Lambda&lt;Func&lt;T, bool&gt;&gt;(containsMethodExp, parameterExp);
+           return Expression.Lambda<Func<T, bool>>(containsMethodExp, parameterExp);
         }
     
-        public static Expression&lt;Func&lt;CustomResultItem, bool&gt;&gt; Equals(string key, string value)
+        public static Expression<Func<CustomResultItem, bool>> Equals(string key, string value)
         {
            key = NormaliseKey(key);
            value = NormaliseGuid(value);
            // create dynamic expression tree to filter for single value properties
-           ParameterExpression parameterExpression = Expression.Parameter(typeof(CustomResultItem), &quot;s&quot;);
+           ParameterExpression parameterExpression = Expression.Parameter(typeof(CustomResultItem), "s");
            Expression property = Expression.Property(parameterExpression, key);
            Expression val = Expression.Constant(value);
     
            // Do binary expression match
            BinaryExpression expEquals = Expression.Equal(property, val);
-           return Expression.Lambda&lt;Func&lt;CustomResultItem, Boolean&gt;&gt;(expEquals, parameterExpression);
+           return Expression.Lambda<Func<CustomResultItem, Boolean>>(expEquals, parameterExpression);
         }
     
         private static string NormaliseGuid(string guid)
         {
-           guid = guid.Replace(&quot;{&quot;, &quot;&quot;);
-           guid = guid.Replace(&quot;}&quot;, &quot;&quot;);
-           guid = guid.Replace(&quot;-&quot;, &quot;&quot;);
+           guid = guid.Replace("{", "");
+           guid = guid.Replace("}", "");
+           guid = guid.Replace("-", "");
            return guid;
         }
     
         private static string NormaliseKey(string key)
         {
-          return key.Replace(&quot; &quot;, &quot;_&quot;);
+          return key.Replace(" ", "_");
         }
     
-        public static Expression&lt;Func&lt;CustomResultItem, bool&gt;&gt; RangeMin(string key, long min)
+        public static Expression<Func<CustomResultItem, bool>> RangeMin(string key, long min)
         {
           key = NormaliseKey(key);
-          ParameterExpression parameterExpression = Expression.Parameter(typeof(CustomResultItem), &quot;s&quot;);
+          ParameterExpression parameterExpression = Expression.Parameter(typeof(CustomResultItem), "s");
           Expression property = Expression.Property(parameterExpression, key);
           Expression val = Expression.Constant(min);
           BinaryExpression expEquals = Expression.GreaterThanOrEqual(property, val);
-          return Expression.Lambda&lt;Func&lt;CustomResultItem, Boolean&gt;&gt;(expEquals, parameterExpression);
+          return Expression.Lambda<Func<CustomResultItem, Boolean>>(expEquals, parameterExpression);
         }
     
-        public static Expression&lt;Func&lt;CustomResultItem, bool&gt;&gt; RangeMax(string key, long max)
+        public static Expression<Func<CustomResultItem, bool>> RangeMax(string key, long max)
         {
           key = NormaliseKey(key);
-          ParameterExpression parameterExpression = Expression.Parameter(typeof(CustomResultItem), &quot;s&quot;);
+          ParameterExpression parameterExpression = Expression.Parameter(typeof(CustomResultItem), "s");
           Expression property = Expression.Property(parameterExpression, key);
           Expression val = Expression.Constant(max);
           BinaryExpression expEquals = Expression.LessThanOrEqual(property, val);
-          return Expression.Lambda&lt;Func&lt;CustomResultItem, Boolean&gt;&gt;(expEquals, parameterExpression);
+          return Expression.Lambda<Func<CustomResultItem, Boolean>>(expEquals, parameterExpression);
         }
       }
-    }</pre>
+    }
+
+```
     
     
-    ### Staple it together..
+### Staple it together..
     
     
-    By putting all the classes together I was then able to create the dynamic search filters.
-    <pre class="brush: csharp; gutter: true">    ISearchIndex searchIndex = ContentSearchManager.GetIndex(&quot;Index&quot;);
+By putting all the classes together I was then able to create the dynamic search filters.
+
+
+``` csharp
+       ISearchIndex searchIndex = ContentSearchManager.GetIndex("Index");
        using (var searchContext = searchIndex.CreateSearchContext())
        {
            var predicate = PredicateBuilder.True();
@@ -215,9 +231,10 @@ var predicate = PredicateBuilder.True();
     
          var resultSet = query.GetResults();
          // Get Results
-         var results = resultSet.Hits.Select(item =&gt; Sitecore.Context.Database.GetItem(item.Document.ItemId))
-         .Where(item =&gt; item != null);
+         var results = resultSet.Hits.Select(item => Sitecore.Context.Database.GetItem(item.Document.ItemId))
+         .Where(item => item != null);
        }
+```
 
 As usual I Hope this saves some time for someone in the future when using expression trees!
 

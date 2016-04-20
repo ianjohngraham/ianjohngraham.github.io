@@ -24,18 +24,19 @@ The example below adds logic to the* GetItem* command to determine if there is a
 If there is no version available then the method returns a version in the fallback language.
 
 
+``` csharp
     public class LanguageFallbackItemProvider : ItemProvider
         {
     
-            private readonly Language defaultLang = Language.Parse(&quot;en&quot;);
-            /// &lt;summary&gt;
+            private readonly Language defaultLang = Language.Parse("en");
+            /// <summary>
             ///  Fallback Provider - Fallback to the default language
-            /// &lt;/summary&gt;
-            /// &lt;param name=&quot;itemId&quot;&gt;&lt;/param&gt;
-            /// &lt;param name=&quot;language&quot;&gt;&lt;/param&gt;
-            /// &lt;param name=&quot;version&quot;&gt;&lt;/param&gt;
-            /// &lt;param name=&quot;database&quot;&gt;&lt;/param&gt;
-            /// &lt;returns&gt;&lt;/returns&gt;
+            /// </summary>
+            /// <param name="itemId"></param>
+            /// <param name="language"></param>
+            /// <param name="version"></param>
+            /// <param name="database"></param>
+            /// <returns></returns>
             protected override Item GetItem(ID itemId, Language language, Version version, Database database)
             {
                 var item = base.GetItem(itemId, language, version, database);
@@ -58,14 +59,14 @@ If there is no version available then the method returns a version in the fallba
                 }
     
                 // We&#039;ve got a version
-                if (item.Versions.GetVersionNumbers().Length &gt; 0)
+                if (item.Versions.GetVersionNumbers().Length > 0)
                 {
                     return item;
                 }
     
                 // If item&#039;s template is in the list of excluded templates then don&#039;t fallback
                 Item templateItem = base.GetItem(item.TemplateID, language, version, database);
-                if (templateItem != null &amp;&amp; Sitecore.Configuration.Settings.GetSetting(&quot;Fallback.ExcludeTemplateIDs&quot;).Contains(templateItem.ID.ToString()))
+                if (templateItem != null &amp;&amp; Sitecore.Configuration.Settings.GetSetting("Fallback.ExcludeTemplateIDs").Contains(templateItem.ID.ToString()))
                 {
                     return item;
                 }
@@ -86,27 +87,34 @@ If there is no version available then the method returns a version in the fallba
     
                 return item;
             }
-        }</pre>
-    As you can see, this is very powerful, but a word of warning: **this method is at the heart of Sitecore and any bugs here can cause horrible Stackoverflow exceptions!!**
+        }
+```
+As you can see, this is very powerful, but a word of warning: **this method is at the heart of Sitecore and any bugs here can cause horrible Stackoverflow exceptions!!**
     
-    Rather than rolling your own solution you could use Alex Shyba's Partial Language Fallback Module, this is also based around customisation of the item provider and provides lots of options for setting up the fallback.
+Rather than rolling your own solution you could use Alex Shyba's Partial Language Fallback Module, this is also based around customisation of the item provider and provides lots of options for setting up the fallback.
     
-    <a href="https://marketplace.sitecore.net/en/Modules/Language_Fallback.aspx" target="_new">https://marketplace.sitecore.net/en/Modules/Language_Fallback.aspx</a>
-    
-    
-    ## Language Resolver
+<a href="https://marketplace.sitecore.net/en/Modules/Language_Fallback.aspx" target="_new">https://marketplace.sitecore.net/en/Modules/Language_Fallback.aspx</a>
     
     
-    The language resolver is a Sitecore pipeline processor that determines the current language that should be used in your Sitecore context.
+## Language Resolver
     
-    The default language resolver uses the URL and cookies to determine the current language.
     
-    Customisation of the language resolver could be useful if you have a Sitecore site that needs different domain names to switch out the languages.
+ The language resolver is a Sitecore pipeline processor that determines the current language that should be used in your Sitecore context.
     
-    The example below maps domain name endings specified in a config to site languages.
-    <pre class="brush: xml; gutter: true">&lt;setting name=&quot;LanguageResolver.domains&quot; value=&quot;.fr|.de&quot; /&gt;
-    &lt;setting name=&quot;LanguageResolver.languages&quot; value=&quot;fr-fr|de-de&quot; /&gt;</pre>
-    <pre class="brush: csharp; gutter: true"> public class LanguageResolver
+ The default language resolver uses the URL and cookies to determine the current language.
+    
+ Customisation of the language resolver could be useful if you have a Sitecore site that needs different domain names to switch out the languages.
+    
+ The example below maps domain name endings specified in a config to site languages.
+
+``` xml
+   <setting name="LanguageResolver.domains" value=".fr|.de" />
+   <setting name="LanguageResolver.languages" value="fr-fr|de-de" />
+```
+
+
+``` csharp
+        public class LanguageResolver
         {
             private int _fallbackDepthLimit = 5;
     
@@ -140,7 +148,7 @@ If there is no version available then the method returns a version in the fallba
                     if (Sitecore.Context.Item == null)
                     {
                         string message = String.Format(
-                            &quot;{0} : context item null : {1}&quot;,
+                            "{0} : context item null : {1}",
                             this.GetType().ToString(),
                             Sitecore.Web.WebUtil.GetRawUrl());
                         Log.Error(message, this);
@@ -149,7 +157,7 @@ If there is no version available then the method returns a version in the fallba
                     else if (Sitecore.Context.Site == null)
                     {
                         string message = String.Format(
-                            &quot;{0} : context site null : {1}&quot;,
+                            "{0} : context site null : {1}",
                             this.GetType().ToString(),
                             Sitecore.Web.WebUtil.GetRawUrl());
                         Log.Error(message, this);
@@ -158,7 +166,7 @@ If there is no version available then the method returns a version in the fallba
     
                     // Custom logic for setting the language 
                     var siteLanguage = ResolveLanguageByUrl();
-                    if (HttpContext.Current.Request.Cookies[Sitecore.Context.Site.GetCookieKey(&quot;lang&quot;)] == null)
+                    if (HttpContext.Current.Request.Cookies[Sitecore.Context.Site.GetCookieKey("lang")] == null)
                     {
                         SetContextLanguage(siteLanguage, true);
                     }
@@ -176,19 +184,19 @@ If there is no version available then the method returns a version in the fallba
             private Sitecore.Globalization.Language ResolveLanguageByUrl()
             {
                 var siteUrl = HttpContext.Current.Request.Url.ToString();
-                var defaultLanguage = Sitecore.Globalization.Language.Parse(&quot;fr-fr&quot;);
-                string domainsSettings = Settings.GetSetting(&quot;LanguageResolver.domains&quot;);
-                string languagesSettings = Settings.GetSetting(&quot;LanguageResolver.languages&quot;);
+                var defaultLanguage = Sitecore.Globalization.Language.Parse("fr-fr");
+                string domainsSettings = Settings.GetSetting("LanguageResolver.domains");
+                string languagesSettings = Settings.GetSetting("LanguageResolver.languages");
                 if (string.IsNullOrEmpty(domainsSettings )  || string.IsNullOrEmpty(languagesSettings ))
                 {
-                    Log.Info(&quot;Language Resolver Settings are empty - please add settings LanguageResolver.domains&quot;,this);
+                    Log.Info("Language Resolver Settings are empty - please add settings LanguageResolver.domains",this);
                     return defaultLanguage;
                 }
     
                 string[] domains = domainsSettings .Split(&#039;|&#039;);
                 string[] languages = languagesSettings .Split(&#039;|&#039;);
     
-                for (int i = 0; i &lt; domains.Count(); i++ )
+                for (int i = 0; i < domains.Count(); i++ )
                 {
                     if (siteUrl.Contains(domains[i]))
                     {
@@ -206,11 +214,12 @@ If there is no version available then the method returns a version in the fallba
     
                 if (spanRequests &amp;&amp; PersistLanguage)
                 {
-                    string cookieName = Sitecore.Context.Site.GetCookieKey(&quot;lang&quot;);
+                    string cookieName = Sitecore.Context.Site.GetCookieKey("lang");
                     Sitecore.Web.WebUtil.SetCookieValue(cookieName, language.Name, DateTime.MaxValue);
                 }
             }
         }
+```
 
 You could also use the language resolver if you want to automatically detect the language of the user. The language resolver could fire up some logic to check the user's IP address from a database and then resolve the language accordingly.
 

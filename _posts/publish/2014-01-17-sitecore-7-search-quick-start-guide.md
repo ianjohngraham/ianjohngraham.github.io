@@ -21,6 +21,8 @@ Firstly, I put together a Person class that will hold the properties of the pers
 This class also contains a *Fields* property. I've set this up so that the properties of the class can be accessed with an indexer, which is useful if you need to get access to the fields dynamically using an *Aggregate* statement in Linq.
 
 
+``` csharp
+
 using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
@@ -35,18 +37,18 @@ using System.Collections.Generic;
     {
         public class Person
         {
-            [IndexField(&quot;firstname_t&quot;)]
+            [IndexField("firstname_t")]
             public string Firstname { get; set; }
-            [IndexField(&quot;surname_t&quot;)]
+            [IndexField("surname_t")]
             public string Surname { get; set; }
-            [IndexField(&quot;role_sm&quot;)]
-            public IEnumerable&lt;string&gt; Role { get; set; }
-            [IndexField(&quot;_template&quot;)]
+            [IndexField("role_sm")]
+            public IEnumerable<string> Role { get; set; }
+            [IndexField("_template")]
             [TypeConverter(typeof(IndexFieldIDValueConverter))]
             public ID TemplateId { get; set; }
     
-            private readonly Dictionary&lt;string, object&gt; _fields = new Dictionary&lt;string, object&gt;();
-            public Dictionary&lt;string, object&gt; fields
+            private readonly Dictionary<string, object> _fields = new Dictionary<string, object>();
+            public Dictionary<string, object> fields
             {
                 get { return _fields; }
             }
@@ -57,7 +59,7 @@ using System.Collections.Generic;
                 {
                     if (key == null)
                     {
-                        throw new ArgumentNullException(&quot;key&quot;);
+                        throw new ArgumentNullException("key");
                     }
     
                     return (string)this.fields[key.ToUpperInvariant()];
@@ -67,69 +69,100 @@ using System.Collections.Generic;
                 {
                     if (key == null)
                     {
-                        throw new ArgumentNullException(&quot;key&quot;);
+                        throw new ArgumentNullException("key");
                     }
     
                     fields[key.ToUpperInvariant()] = value;
                 }
             }
     
-        }</pre>
-    Sitecore 7 Search allows you to use Linq to perform your search queries and uses the [IQueryable&lt;T&gt; interface](http://msdn.microsoft.com/en-us/library/system.linq.iqueryable%28v=vs.110%29.aspx). Let's plug the Person Entity class into some Linq and start using the *IQueryable*.
-    <pre class="brush: csharp; gutter: true">using (var context = ContentSearchManager.GetIndex(&quot;sitecore_web_index&quot;).CreateSearchContext())
+        }
+```
+
+
+Sitecore 7 Search allows you to use Linq to perform your search queries and uses the [IQueryable<T> interface](http://msdn.microsoft.com/en-us/library/system.linq.iqueryable%28v=vs.110%29.aspx). Let's plug the Person Entity class into some Linq and start using the *IQueryable*.
+    
+
+``` csharp
+    using (var context = ContentSearchManager.GetIndex("sitecore_web_index").CreateSearchContext())
     {
-         IQueryable&lt;Person&gt; query = context.GetQueryable&lt;Person&gt;().Where(i=&gt; i.Firstname.Equals(&quot;John&quot;));
-    }</pre>
-    So with a single line of code I've set up an *IQueryable&lt;Person&gt;* where the firstname is John.  Well, apart from the using statement; - any Sitecore 7 searching has to be done inside a context.
+         IQueryable<Person> query = context.GetQueryable<Person>().Where(i=> i.Firstname.Equals("John"));
+    }
+```
+
+So with a single line of code I've set up an *IQueryable<Person>* where the firstname is John.  Well, apart from the using statement; - any Sitecore 7 searching has to be done inside a context.
     
-    Note, I haven't actually called upon the index yet; this is the next step...
-    <pre class="brush: csharp; gutter: true">query.GetResults();</pre>
-    One line again! Sitecore 7 gives you the *GetResults()*  method on the *IQueryable*. This will then translate the predicates, that you specified using Linq, into actual query language that can be executed on your index. The *GetResults()* method saves you a lot of time and creates an object that contains all the things you need for search results rendering e.g. number of items found, relevancy scoring of items.
+Note, I haven't actually called upon the index yet; this is the next step...
     
-    When you have called the* GetResults* method, take a look in the *search.log* file in your Sitecore data folder. In here you'll find the actual query that Sitecore uses behind the scenes to query the index. This is invaluable  for debugging search queries, particularly as Sitecore hides a lot of the complexities of searching.
+``` csharp
+
+query.GetResults();
+```
+
+One line again! Sitecore 7 gives you the *GetResults()*  method on the *IQueryable*. This will then translate the predicates, that you specified using Linq, into actual query language that can be executed on your index. The *GetResults()* method saves you a lot of time and creates an object that contains all the things you need for search results rendering e.g. number of items found, relevancy scoring of items.
+    
+
+When you have called the* GetResults* method, take a look in the *search.log* file in your Sitecore data folder. In here you'll find the actual query that Sitecore uses behind the scenes to query the index. This is invaluable  for debugging search queries, particularly as Sitecore hides a lot of the complexities of searching.
     
     **Predicate Builder**
     This feature is slightly hidden away, but really useful for adding dynamic values in your search. The predicate builder allows you to create more complex queries using *AND* and *OR* and it generates complex <a title="Expression Trees" href="http://msdn.microsoft.com/en-us/library/bb397951.aspx" target="_blank">Expression trees</a> without having to know about their inner workings.
     
     When performing a search I only wanted to search Sitecore items with a particular template and these specific templates needed to be dynamic - cue *PredicateBuilder*:
-    <pre class="brush: csharp; gutter: true">var predicate = PredicateBuilder.True&lt;Person&gt;();
-                    // Restrict search to limited number of templates (only person items) using an Or on the predicate 
-                    predicate = TemplateRestrictions.Aggregate(predicate, (current, t) =&gt; current.Or(p =&gt; p.TemplateId == t));
-                    // Use filter and get an IQueryable
-                    IQueryable&lt;Person&gt; query = context.GetQueryable&lt;Person&gt;().Filter(predicate);</pre>
-    Firstly I create a list of Sitecore IDs  called *TemplateRestrictions* which correspond to Sitecore template IDs. Then I use the handy *Aggregate* of *IEnumerable* to go through each item in the list and build up a predicate.
     
-    Next I  use the predicate instead of a *Linq* expression. Note that I'm using *Filter* instead of *Where*. The main difference between these two methods is that *Filter* doesn't calculate relevancy, so if you are doing any other queries the scoring will not be affected.
+
+``` csharp
+    var predicate = PredicateBuilder.True<Person>();
+                    // Restrict search to limited number of templates (only person items) using an Or on the predicate 
+                    predicate = TemplateRestrictions.Aggregate(predicate, (current, t) => current.Or(p => p.TemplateId == t));
+                    // Use filter and get an IQueryable
+                    IQueryable<Person> query = context.GetQueryable<Person>().Filter(predicate);
+```
+
+Firstly I create a list of Sitecore IDs  called *TemplateRestrictions* which correspond to Sitecore template IDs. Then I use the handy *Aggregate* of *IEnumerable* to go through each item in the list and build up a predicate.
+    
+Next I  use the predicate instead of a *Linq* expression. Note that I'm using *Filter* instead of *Where*. The main difference between these two methods is that *Filter* doesn't calculate relevancy, so if you are doing any other queries the scoring will not be affected.
     
     **Faceting**
-    <pre class="brush: csharp; gutter: true"> // Apply facets to query
+  
+``` csharp
+             // Apply facets to query
                     if (Facets.Any())
                     {
                         // Go through and set up facets on the IQueryable 
-                        query = Facets.Aggregate(query, (current, facetName) =&gt; current.FacetOn(c =&gt; c[facetName]));
-                    }</pre>
-    When you *facetOn* an *IQueryable,* Sitecore will instruct the search technology to apply faceting on the fields you have selected. In the above example I've used an Aggregate again (because I like one liners - but you could use a *foreach*) to go through a list of index field names  and call *facetOn* on the *IQueryable*.
+                        query = Facets.Aggregate(query, (current, facetName) => current.FacetOn(c => c[facetName]));
+                    }
+```
+
+When you *facetOn* an *IQueryable,* Sitecore will instruct the search technology to apply faceting on the fields you have selected. In the above example I've used an Aggregate again (because I like one liners - but you could use a *foreach*) to go through a list of index field names  and call *facetOn* on the *IQueryable*.
     
-    When you have executed the search using the *GetResults()* method, Sitecore returns a *SearchResults&lt;Person&gt; *object* , *which has a *Hits* collection and a* Facets.Categories* list property. You can loop through this list to get all the facet information about the selected fields.
-    <pre class="brush: csharp; gutter: true">  
-           List&lt;FacetCategory&gt; facetCategories = peopleResults.Facets.Categories;
+When you have executed the search using the *GetResults()* method, Sitecore returns a *SearchResults<Person> *object* , *which has a *Hits* collection and a* Facets.Categories* list property. You can loop through this list to get all the facet information about the selected fields.
+
+
+``` csharp
+           List<FacetCategory> facetCategories = peopleResults.Facets.Categories;
                 foreach (var category in facetCategories)
                 {
-                    outputBuilder.Append(&quot;&lt;p&gt;&lt;b&gt;Facet Category Name: &lt;/b&gt;&quot; + category.Name + &quot;&lt;p/&gt;&quot;);
+                    outputBuilder.Append("<p><b>Facet Category Name: </b>" + category.Name + "<p/>");
                     foreach (var value in category.Values)
                     {
-                        outputBuilder.Append(&quot;&lt;p&gt;&lt;b&gt;Value:&lt;/b&gt; &quot; + value.Name + &quot;&lt;p/&gt;&quot;);
-                        outputBuilder.Append(&quot;&lt;p&gt;&lt;b&gt;Number of results with this value: &lt;/b&gt;&quot; + value.Aggregate + &quot;&lt;p/&gt;&quot;);
-                        outputBuilder.Append(&quot;&lt;p&gt;****************************&lt;/p&gt;&quot;);
+                        outputBuilder.Append("<p><b>Value:</b> " + value.Name + "<p/>");
+                        outputBuilder.Append("<p><b>Number of results with this value: </b>" + value.Aggregate + "<p/>");
+                        outputBuilder.Append("<p>****************************</p>");
                     }                
-                }</pre>
-    This makes it really easy to construct search interfaces that rely on faceting and you can give your users a great experience by telling them exactly how many of each value are in the search results.
+                }
+```
+
+
+This makes it really easy to construct search interfaces that rely on faceting and you can give your users a great experience by telling them exactly how many of each value are in the search results.
     
-    **Putting it all together...**
-    Here's a full example of the People Search using the Person Entity a PeopleSearch business class and some code to write out the results.
+**Putting it all together...**
+Here's a full example of the People Search using the Person Entity a PeopleSearch business class and some code to write out the results.
     
-    **Person class**
-    <pre class="brush: csharp; gutter: true">using System;
+**Person class**
+
+
+``` csharp
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
@@ -144,18 +177,18 @@ using System.Collections.Generic;
     {
         public class Person 
         {
-            [IndexField(&quot;firstname_t&quot;)]
+            [IndexField("firstname_t")]
             public string Firstname { get; set; }
-            [IndexField(&quot;surname_t&quot;)]
+            [IndexField("surname_t")]
             public string Surname { get; set; }
-            [IndexField(&quot;role_sm&quot;)]
-            public IEnumerable&lt;string&gt; Role { get; set; }
-            [IndexField(&quot;_template&quot;)]
+            [IndexField("role_sm")]
+            public IEnumerable<string> Role { get; set; }
+            [IndexField("_template")]
             [TypeConverter(typeof(IndexFieldIDValueConverter))]
             public ID TemplateId { get; set; }
     
-            private readonly Dictionary&lt;string, object&gt; _fields = new Dictionary&lt;string, object&gt;();
-            public Dictionary&lt;string, object&gt; fields
+            private readonly Dictionary<string, object> _fields = new Dictionary<string, object>();
+            public Dictionary<string, object> fields
             {
                 get { return _fields; }
             }
@@ -166,7 +199,7 @@ using System.Collections.Generic;
                 {
                     if (key == null)
                     {
-                        throw new ArgumentNullException(&quot;key&quot;);
+                        throw new ArgumentNullException("key");
                     }
     
                     return (string)this.fields[key.ToUpperInvariant()];
@@ -176,7 +209,7 @@ using System.Collections.Generic;
                 {
                     if (key == null)
                     {
-                        throw new ArgumentNullException(&quot;key&quot;);
+                        throw new ArgumentNullException("key");
                     }
     
                     fields[key.ToUpperInvariant()] = value;
@@ -184,9 +217,14 @@ using System.Collections.Generic;
             }
     
         }
-    }</pre>
-    **PeopleSearch Class**
-    <pre class="brush: csharp; gutter: true">using System;
+    }
+```
+
+
+**PeopleSearch Class**
+
+``` csharp
+    using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Linq;
@@ -202,43 +240,43 @@ using System.Collections.Generic;
         public class PeopleSearch
         {
             private static ISearchIndex _index;
-            private List&lt;ID&gt; _templateRestrictions = new List&lt;ID&gt;();
-            private List&lt;string&gt; _facets = new List&lt;string&gt;();
+            private List<ID> _templateRestrictions = new List<ID>();
+            private List<string> _facets = new List<string>();
     
             private static ISearchIndex Index
             {
                 get { return _index ?? 
-                (_index = ContentSearchManager.GetIndex(Sitecore.Configuration.Settings.GetSetting(&quot;SearchIndex.Index&quot;))); }
+                (_index = ContentSearchManager.GetIndex(Sitecore.Configuration.Settings.GetSetting("SearchIndex.Index"))); }
             }
     
-            public List&lt;ID&gt; TemplateRestrictions
+            public List<ID> TemplateRestrictions
             {
                 get { return _templateRestrictions; }
                 set { _templateRestrictions = value; }
             }
     
-            public List&lt;string&gt; Facets
+            public List<string> Facets
             {
                 get { return _facets; }
                 set { _facets = value; }
             }
     
-            public SearchResults&lt;Person&gt; Search(string searchTerm)
+            public SearchResults<Person> Search(string searchTerm)
             {
                  // Create search context - required for searching
                 using (var context = Index.CreateSearchContext())
                 {
                     // Setup a predicate builder as an easy way to build up predicate
-                    var predicate = PredicateBuilder.True&lt;Person&gt;();
+                    var predicate = PredicateBuilder.True<Person>();
                     // Restrict search to limited number of templates (only person items) using an Or on the predicate 
-                    predicate = TemplateRestrictions.Aggregate(predicate, (current, t) =&gt; current.Or(p =&gt; p.TemplateId == t));
+                    predicate = TemplateRestrictions.Aggregate(predicate, (current, t) => current.Or(p => p.TemplateId == t));
                     // Use filter and get an IQueryable
-                    IQueryable&lt;Person&gt; query = context.GetQueryable&lt;Person&gt;().Filter(predicate);
+                    IQueryable<Person> query = context.GetQueryable<Person>().Filter(predicate);
     
                     // now we can perform filter if we have a search term
                     if (!string.IsNullOrEmpty(searchTerm))
                     {
-                        query = query.Where(i =&gt; i.Firstname.Equals(searchTerm).Boost(10) ||
+                        query = query.Where(i => i.Firstname.Equals(searchTerm).Boost(10) ||
                                             i.Surname.Equals(searchTerm).Boost(20));
     
                     }
@@ -247,7 +285,7 @@ using System.Collections.Generic;
                     if (Facets.Any())
                     {
                         // Go through and set up facets on the IQueryable 
-                        query = Facets.Aggregate(query, (current, facetName) =&gt; current.FacetOn(c =&gt; c[facetName]));
+                        query = Facets.Aggregate(query, (current, facetName) => current.FacetOn(c => c[facetName]));
                     }
     
                     // Call query and return results
@@ -255,54 +293,62 @@ using System.Collections.Generic;
                 }
             }
         } 
-    }</pre>
-    **Output.aspx**
-    <pre class="brush: csharp; gutter: true"> // Setup template restrictions
-                Sitecore.Data.ID templateId = new Sitecore.Data.ID(&quot;{4E4C2EB4-F7A5-403B-A80E-44146C66A42A}&quot;);
+    }
+```
+
+**Output.aspx**
+
+``` csharp
+                // Setup template restrictions
+                Sitecore.Data.ID templateId = new Sitecore.Data.ID("{4E4C2EB4-F7A5-403B-A80E-44146C66A42A}");
                 PeopleSearch peopleSearch = new PeopleSearch();
                 peopleSearch.TemplateRestrictions.Add(templateId);
                 // Add a facet
-                peopleSearch.Facets.Add(&quot;role_sm&quot;);
+                peopleSearch.Facets.Add("role_sm");
                 // get results
-                SearchResults&lt;Person&gt; peopleResults =  peopleSearch.Search(&quot;&quot;);
+                SearchResults<Person> peopleResults =  peopleSearch.Search("");
     
                 StringBuilder outputBuilder = new StringBuilder();
-                outputBuilder.Append(&quot;&lt;p&gt;***********Results*************************************&lt;/p&gt;&quot;);
-                outputBuilder.Append(&quot;&lt;p&gt;Found: &quot; + peopleResults.TotalSearchResults + &quot; results &lt;/p&gt;&quot;);
+                outputBuilder.Append("<p>***********Results*************************************</p>");
+                outputBuilder.Append("<p>Found: " + peopleResults.TotalSearchResults + " results </p>");
     
                 // Display hits
                 foreach (var hit in peopleResults.Hits)
                 {
-                    outputBuilder.Append(&quot;&lt;p&gt;&lt;b&gt;Name:&lt;/b&gt; &quot; + hit.Document.Firstname + &quot; &quot; + hit.Document.Surname + &quot;&lt;/p&gt;&quot;);
+                    outputBuilder.Append("<p><b>Name:</b> " + hit.Document.Firstname + " " + hit.Document.Surname + "</p>");
                     if (hit.Document.Role != null)
                     {
     
                         foreach (var role in hit.Document.Role)
                         {
-                            outputBuilder.Append(&quot;&lt;p&gt;&lt;b&gt;Role Sitecore Id:&lt;/b&gt;&quot; + role + &quot;&lt;/p&gt;&quot;);
+                            outputBuilder.Append("<p><b>Role Sitecore Id:</b>" + role + "</p>");
                         }
                     }
     
-                    outputBuilder.Append(&quot;&lt;p&gt;****************************&lt;/p&gt;&quot;);
+                    outputBuilder.Append("<p>****************************</p>");
                 }
     
-                outputBuilder.Append(&quot;&lt;p&gt;***********Facets*************************************&lt;/p&gt;&quot;);
+                outputBuilder.Append("<p>***********Facets*************************************</p>");
                 // Loop through facet categories
-                List&lt;FacetCategory&gt; facetCategories = peopleResults.Facets.Categories;
+                List<FacetCategory> facetCategories = peopleResults.Facets.Categories;
                 foreach (var category in facetCategories)
                 {
-                    outputBuilder.Append(&quot;&lt;p&gt;&lt;b&gt;Facet Category Name: &lt;/b&gt;&quot; + category.Name + &quot;&lt;p/&gt;&quot;);
+                    outputBuilder.Append("<p><b>Facet Category Name: </b>" + category.Name + "<p/>");
                     foreach (var value in category.Values)
                     {
-                        outputBuilder.Append(&quot;&lt;p&gt;&lt;b&gt;Value:&lt;/b&gt; &quot; + value.Name + &quot;&lt;p/&gt;&quot;);
-                        outputBuilder.Append(&quot;&lt;p&gt;&lt;b&gt;Number of results with this value: &lt;/b&gt;&quot; + value.Aggregate + &quot;&lt;p/&gt;&quot;);
-                        outputBuilder.Append(&quot;&lt;p&gt;****************************&lt;/p&gt;&quot;);
+                        outputBuilder.Append("<p><b>Value:</b> " + value.Name + "<p/>");
+                        outputBuilder.Append("<p><b>Number of results with this value: </b>" + value.Aggregate + "<p/>");
+                        outputBuilder.Append("<p>****************************</p>");
                     }                
                 }
     
-      lblOutput.Text = outputBuilder.ToString();</pre>
-    Actual Output
-    <pre class="brush: text; gutter: true">***********Results*************************************
+      lblOutput.Text = outputBuilder.ToString();
+```
+
+  
+Actual Output
+
+    ***********Results*************************************
     
     Found: 5 results
     

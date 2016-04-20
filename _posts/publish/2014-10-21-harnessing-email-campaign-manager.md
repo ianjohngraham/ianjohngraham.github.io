@@ -23,7 +23,7 @@ For the build of this messaging tool I used [ECM v2.1](http://sdn.sitecore.net/P
 
 You may find that the install takes a while, but go with it, it'll get there in the end!
 
-With the package installed, fire up the the SPEAK interface by going to All Programs -&gt; Email Campaign Manager from the Sitecore Desktop. This will then create the necessary Email Campaign Manager node and various other items in Sitecore .
+With the package installed, fire up the the SPEAK interface by going to All Programs -> Email Campaign Manager from the Sitecore Desktop. This will then create the necessary Email Campaign Manager node and various other items in Sitecore .
 
 
 ### Creating and editing emails
@@ -33,72 +33,92 @@ So then firstly, how do you create an email?
 
 For the tool I wanted to send emails of type *AB Test Message* as these are the most customisable.
 
-
+``` csharp
  // Create the Message
-     var master = Sitecore.Configuration.Factory.GetDatabase(&quot;master&quot;);
+     var master = Sitecore.Configuration.Factory.GetDatabase("master");
      // This is the ID branch for the email - Two Column 
-     string branchId = &quot;{9E170B31-F8AA-4E1F-B605-2FC0BD4FE120}&quot;;
+     string branchId = "{9E170B31-F8AA-4E1F-B605-2FC0BD4FE120}";
      // This is the type of message - this is Adhoc.
-     Item typeItem = master.GetItem(Sitecore.Data.ID.Parse(&quot;{401F5ECD-5931-4C05-A4D1-501C07820830}&quot;));
+     Item typeItem = master.GetItem(Sitecore.Data.ID.Parse("{401F5ECD-5931-4C05-A4D1-501C07820830}"));
     // This is the node where want to create the message
-    Item destination = master.GetItem(Sitecore.Data.ID.Parse(&quot;{2CF0A9C8-FE56-44D8-B750-6BDE3A34A532}&quot;));
+    Item destination = master.GetItem(Sitecore.Data.ID.Parse("{2CF0A9C8-FE56-44D8-B750-6BDE3A34A532}"));
     
-     Sitecore.Modules.EmailCampaign.Messages.MessageItem message = Sitecore.Modules.EmailCampaign.Messages.MessageItemSource.Create(&quot;New Mail Messsage&quot;, templateId, typeItem, destination);</pre>
-    This will create the branch item in Sitecore.
+     Sitecore.Modules.EmailCampaign.Messages.MessageItem message = Sitecore.Modules.EmailCampaign.Messages.MessageItemSource.Create("New Mail Messsage", templateId, typeItem, destination);
+```
+
     
-    It's in the Sitecore tree, so far so good!
+ It's in the Sitecore tree, so far so good!
     
-    ![](data:image/png;base64,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)
+  ![](data:image/png;base64,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)
     
-    Once we've called  the *Create* method it will return a *Message* item. You can get access to the Sitecore  item by using the *InnerItem* property on the message and treating it like any other Sitecore item.
-    <pre class="brush: csharp; gutter: false">// Edit the Message 
+ Once we've called  the *Create* method it will return a *Message* item. You can get access to the Sitecore  item by using the *InnerItem* property on the message and treating it like any other Sitecore item.
+
+``` csharp
+   // Edit the Message 
     var messageReturned = Sitecore.Modules.EmailCampaign.Factory.GetMessage(message.ID);
     messageReturned.InnerItem.Editing.BeginEdit();
-    messageReturned.InnerItem[&quot;Body&quot;] = &quot;Message&quot;;</pre>
+    messageReturned.InnerItem["Body"] = "Message";</pre>
+
+```
     
     
-    ### Sending an email
+### Sending an email
     
     
-    Ok, let's send an email..
-    <pre class="brush: csharp; gutter: false">  // Send the message Asynchronously
+Ok, let's send an email..
+    
+
+``` csharp
+    // Send the message Asynchronously
     Sitecore.Modules.EmailCampaign.AsyncSendingManager manager = new Sitecore.Modules.EmailCampaign.AsyncSendingManager(message);
-                manager.SendMessage();</pre>
-    Let's schedule an email for tomorrow!!
-    <pre class="brush: csharp; gutter: false">  // Send Scheduled Message - This Creates a new Sitecore Task which sends at a specified time
+                manager.SendMessage();
+```
+
+Let's schedule an email for tomorrow!!
+
+
+``` csharp
+               // Send Scheduled Message - This Creates a new Sitecore Task which sends at a specified time
                 Sitecore.Modules.EmailCampaign.Core.ScheduledDispatch dispatch = new Sitecore.Modules.EmailCampaign.Core.ScheduledDispatch(messageReturned);
                 DateTime tomorrow = DateTime.Now.AddDays(1);
-                dispatch.CreateSendingTaskItem(Sitecore.DateUtil.ToIsoDate(tomorrow));</pre>
+                dispatch.CreateSendingTaskItem(Sitecore.DateUtil.ToIsoDate(tomorrow));
+```
+
     
     
-    ### Overrriding the Distribution List
+### Overrriding the Distribution List
     
     
-    A requirement for this tool was to have the distribution list for the email pulled in from an external service rather than using the target audiences and roles that are the default setup of ECM. This took a while to figure out, but I managed to get it working by adding a new pipeline processor.
+A requirement for this tool was to have the distribution list for the email pulled in from an external service rather than using the target audiences and roles that are the default setup of ECM. This took a while to figure out, but I managed to get it working by adding a new pipeline processor.
     
-    The Email Campaign config file contains the *DispatchNewsletter* Pipeline. I inserted an entry here to run some code that would populate the distribution list before ECM's default functionality take place.
-    <pre class="brush: xml; gutter: false"> &lt;DispatchNewsletter&gt;
-            &lt;processor type=&quot;Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.CheckPreconditions, Sitecore.EmailCampaign&quot; /&gt;
+The Email Campaign config file contains the *DispatchNewsletter* Pipeline. I inserted an entry here to run some code that would populate the distribution list before ECM's default functionality take place.
     
-    &lt;!-- Insert Processor here --&gt;
+``` xml
+           <DispatchNewsletter>
+            <processor type="Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.CheckPreconditions, Sitecore.EmailCampaign" />
     
-            &lt;processor type=&quot;Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.MoveToProcessing, Sitecore.EmailCampaign&quot; /&gt;
-            &lt;processor type=&quot;Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.DeployAnalytics, Sitecore.EmailCampaign&quot; /&gt;
-            &lt;processor type=&quot;Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.QueueMessage, Sitecore.EmailCampaign&quot; /&gt;
-            &lt;processor type=&quot;Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.LaunchDedicatedServers, Sitecore.EmailCampaign&quot; /&gt;
-            &lt;processor type=&quot;Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.SendMessage, Sitecore.EmailCampaign&quot; /&gt;
-            &lt;processor type=&quot;Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.MoveToSent, Sitecore.EmailCampaign&quot; /&gt;
-            &lt;processor type=&quot;Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.NotifyDispatchFinished, Sitecore.EmailCampaign&quot; /&gt;
-            &lt;processor type=&quot;Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.FinalizeDispatch, Sitecore.EmailCampaign&quot; /&gt;
-          &lt;/DispatchNewsletter&gt;</pre>
-    The pipelne processer code below goes through a list of subscribers pulled from a REST service and adds them to the subscribers collection.
-    <pre class="brush: csharp; gutter: true"> 
-           foreach (Person person in people)
+           <!-- Insert Processor here -->
+    
+            <processor type="Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.MoveToProcessing, Sitecore.EmailCampaign" />
+            <processor type="Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.DeployAnalytics, Sitecore.EmailCampaign" />
+            <processor type="Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.QueueMessage, Sitecore.EmailCampaign" />
+            <processor type="Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.LaunchDedicatedServers, Sitecore.EmailCampaign" />
+            <processor type="Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.SendMessage, Sitecore.EmailCampaign" />
+            <processor type="Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.MoveToSent, Sitecore.EmailCampaign" />
+            <processor type="Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.NotifyDispatchFinished, Sitecore.EmailCampaign" />
+            <processor type="Sitecore.Modules.EmailCampaign.Core.Pipelines.DispatchNewsletter.FinalizeDispatch, Sitecore.EmailCampaign" />
+          </DispatchNewsletter>
+```
+
+The pipelne processer code below goes through a list of subscribers pulled from a REST service and adds them to the subscribers collection.
+
+``` csharp
+          foreach (Person person in people)
           {
               Contact useraccount;
               var username = Util.AddressToUserName(person.EmailAddress);
               string commonDomain = managerRootFromId.Settings.CommonDomain;
-              string fullName = commonDomain + &quot;\\&quot; + Util.AddressToUserName(username);
+              string fullName = commonDomain + "\\" + Util.AddressToUserName(username);
               if (User.Exists(fullName))
               {
                  // Use existing details
@@ -110,14 +130,15 @@ For the tool I wanted to send emails of type *AB Test Message* as these are the 
                  useraccount = Contact.GetAnonymousFromEmail(person.EmailAddress, managerRootFromId);
               }
     
-              useraccount.InnerUser.Profile[&quot;Fullname&quot;] = string.Format(&quot;{0} {1}&quot;, person.Firstname,
+              useraccount.InnerUser.Profile["Fullname"] = string.Format("{0} {1}", person.Firstname,
                                                                                               person.Surname);
-              useraccount.InnerUser.Profile[&quot;userid&quot;] = person.Id;
+              useraccount.InnerUser.Profile["userid"] = person.Id;
     
               // Update Subscriber Lists.
               args.Message.Subscribers.Add(useraccount);
               args.Message.SubscribersNames.Add(useraccount.InnerUser.Name);
           }
+```
 
 You'll notice that you still have to create a user in Sitecore - this unfortunately, is a requirement of ECM. The code above checks to see whether the user already exists in the system or creates a new anonymous user.
 
