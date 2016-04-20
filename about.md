@@ -20,9 +20,13 @@ title: About Coreblimey
                     I've just used a play on words with Sitecore. "Cor Blimey" is an exclamation of surprise derived from "God blind me"!
 
                     If you've ever seen the film Mary Poppins, it's the kind of thing you'd expect Bert (the cockney chimney sweep) to say if for example his hat blew off in the wind.
-
+                  </p>     
+                  <p>
                     This blog is not in anyway related to packaging, ab workouts or a film documenting the relationship between Carry On actors Barbara Windsor and Sid James...Well, not yet anyway!
+                 </p>
 
+                <p>
                     If you'd like to get in touch, just drop me a comment or get me on Twitter <a href="https://twitter.com/ianjohngraham">@ianjohngraham </a>and I'll get back to you.
-                </p>
+               </p>
+               
 </div>
