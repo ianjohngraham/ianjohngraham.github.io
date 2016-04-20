@@ -37,11 +37,13 @@ I've created a simple form on Github which will populate the data in xDB - <a h
 
 The form uses the new analytics API to update a user's Facets .
 
+``` csharp
 
- var personalInfo = Tracker.Current.Contact.GetFacet&lt;Sitecore.Analytics.Model.Entities.IContactPersonalInfo&gt;(&quot;Personal&quot;);
-                personalInfo.FirstName = txtFirstname.Text;
-                personalInfo.Surname = txtSurname.Text;
+    var personalInfo = Tracker.Current.Contact.GetFacet<Sitecore.Analytics.Model.Entities.IContactPersonalInfo<("Personal");
+    personalInfo.FirstName = txtFirstname.Text;
+    personalInfo.Surname = txtSurname.Text;
 
+```
 
 
 ## Step 4 - Abandon session

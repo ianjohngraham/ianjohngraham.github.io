@@ -23,11 +23,11 @@ First I needed to get the data for this. Looking through the Sitecore 8 Reportin
 Next I needed a way to surface this data in the Experience Analytics Dashboard. Fortunately, Sitecore 8 comes with a new *ReportDataProviderBase* and *ReportDataQuery* classes to act as a convenient data access layer.
 
 The data can easily be surfaced like this:
-<script type="text/javascript" src="https://gist.github.com/ianjohngraham/4e1ca55730108b65f321.js"></script>I created a template and item in the Core database that will hold the SQL query that will be return our visit data. I then instantiate a  new *ReportDataQuery *object and pass the SQL to the constructor.
+<script type="text/javascript" src="https://gist.github.com/ianjohngraham/4e1ca55730108b65f321.js"></script>I created a template and item in the Core database that will hold the SQL query that will be return our visit data. I then instantiate a  new *ReportDataQuery* object and pass the SQL to the constructor.
 
-Then I call the *GetData()* method on the *ReportDataProvider* passing in the query object. From here I call the *GetDataTable() *method to get a DataTable*.*
+Then I call the *GetData()* method on the *ReportDataProvider* passing in the query object. From here I call the *GetDataTable()* method to get a *DataTable*.
 
-* Note, you can also use parameterised queries here and use an overload method on the ReportDataQuery class to provide a dictionary of parameters. *
+* Note, you can also use parameterised queries here and use an overload method on the ReportDataQuery class to provide a dictionary of parameters. 
 
 To get the data in a usable format for SPEAK you have to provide the data as JSON and have the data available using an endpoint.
 
@@ -39,7 +39,7 @@ With the controller in place I set up a few classes to aid with the serialisatio
 
 With this in place the controller returned JSON in the correct format
 
-{"data":{"dataset":[{"data":[{"visitType":"Return Visitors","visits":"76"},{"visitType":"New Visitors","visits":"115"}]}]}}
+   {"data":{"dataset":[{"data":[{"visitType":"Return Visitors","visits":"76"},{"visitType":"New Visitors","visits":"115"}]}]}}
 
 I then followed these steps:
 
@@ -83,18 +83,21 @@ Add a new Page code rendering to your top level item and specify the path to you
 
 The script file is as follows:
 
-*var requestOptions = {*
-* url: "/sitecore/api/visitdata"*
-* , parameters: ""*
-* , onSuccess: function (data) {*
 
-*console.log("this is the data" +data);*
-* }*
-* };*
+``` javascript
+var requestOptions = {
+ url: "/sitecore/api/visitdata"
+ , parameters: ""
+, onSuccess: function (data) {
+
+console.log("this is the data" +data);
+ } };
 
 app.ChartDataProvider1.viewModel.getData(requestOptions);
 }
 });
+```
+
 
 Load up the Experience Analytics Dashboard.
 

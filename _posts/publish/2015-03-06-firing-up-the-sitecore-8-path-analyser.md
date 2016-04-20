@@ -56,8 +56,6 @@ You can find this here in your instance ** /Sitecore/admin/pathanalyzer.aspx**
 <a href="http://coreblimey.azurewebsites.net/wp-content/uploads/2015/03/maps.jpg">![maps](http://coreblimey.azurewebsites.net/wp-content/uploads/2015/03/maps.jpg)</a>
 
 
-## 
-
 
 On this screen you can see exactly what is happening with the mechanics used for the data collection for the Path Analyzer. Note that all the Maps have to be deployed before they will start recording data. Also I would recommend clicking the **Rebuild All Deployed Maps** on this screen to make sure everything is set up correctly.
 

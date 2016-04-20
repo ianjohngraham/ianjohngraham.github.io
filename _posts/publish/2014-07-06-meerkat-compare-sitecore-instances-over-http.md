@@ -14,17 +14,21 @@ We have various tools and source control to facilitate continous delivery of our
 For example, you may have content in an authoring environment and you need to pull these items back into your local environment for testing. You may be working on an upgrade where a content freeze is not an option and you have to get all the changes since you started the upgrade. Again, there are tools available, but I wanted to have a free tool that would sit inside Sitecore and be a simple case of pressing a button to see all the changes. So I came up with Meerkat.
 
 **So what is it exactly?**
+
 Ok, it's based upon [Sitecore Courier,](http://sitecorecourier.codeplex.com/) but instead of working with serialised items, the items are compared over http using a WCF service.
 
 **Meerkat Service**
+
 To make comparing work you have to have a Meerkat WCF setup on the same machine as your Sitecore instance. The service is a simple OData WCF Data Service setup to respond in the Atom format. Entity framework is then used to access the Sitecore items directly rather than using the Sitecore api. The service can be hosted using IIS or the simple console app that I have provided with the project.
 
 **Meerkat Client**
+
 This a basic aspx page that sits in your Sitecore instance. You enter the options in the form for specifying what instances you are synchronising. You need to supply the URL and port of a Meerkat service and the full file path of the Sitecore webroots of the instances.
 
 The client makes use of SignalR to carry out the comparing and handle the long running process of comparing items whilst still providing feedback to the user.
 
 **Comparing instances**
+
 Here's a demo of the tool in action.
 
 Firstly, we have to make sure the service is running. So fire up the Meerkat Service using the Meerkat.Sitecore.Selfhost Console App. When running the application you can specify the URL you want to use for the service and the port - I've used 8081 in this example.
@@ -68,6 +72,7 @@ When you're happy with the items you need, click "Generate Package". An update p
 &nbsp;
 
 **Future?**
+
 At the moment I would descibe the tool as a proof of concept and there's definitely room for enhancements. Some ideas for the future could include:
 
 

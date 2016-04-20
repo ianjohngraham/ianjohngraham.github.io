@@ -34,6 +34,7 @@ With this in place, marketers have access to all the new conditions in the rules
 
 I then created the code for the Rule Action. The action takes the current Outcome item and a monetary value as parameters and creates the object on the current contact.
 
+``` csharp
 
     public class SetOutcomeRuleAction&lt;T&gt; : RuleAction&lt;T&gt; where T : RuleContext
         {
@@ -70,14 +71,18 @@ I then created the code for the Rule Action. The action takes the current Outcom
                 if (manager != null) 
                     manager.Save(outcome);
             }
-        }</pre>
+        }
+```
     
     
-    ## Running the Rules
+## Running the Rules
     
     
-    I needed a way for these rules to be checked at runtime while a user is browsing the site. I used a simple pipeline processer for this that kicks in after the Sitecore.Analytics.Pipelines.InitializeTracker.RunRules processor.
-    <pre class="brush: csharp; gutter: true">using Sitecore.Data;
+ I needed a way for these rules to be checked at runtime while a user is browsing the site. I used a simple pipeline processer for this that kicks in after the *Sitecore.Analytics.Pipelines.InitializeTracker.RunRules* processor.
+    
+``` csharp
+
+    using Sitecore.Data;
     using Sitecore.Data.Items;
     using Sitecore.Pipelines.HttpRequest;
     using Sitecore.Rules;
@@ -153,7 +158,7 @@ I then created the code for the Rule Action. The action takes the current Outcom
         }
     }
 
-
+```
 
 ## Pulling the Trigger
 

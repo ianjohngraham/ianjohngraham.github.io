@@ -44,8 +44,9 @@ You can create new Outcomes in the marketing centre by adding new Outcome items 
 
 The following code assigns the Sales Lead outcome to a contact visiting the site. Note: you'll need to add a reference to Sitecore.Analytics.Outcome.dll.
 
+``` csharp
 
- ID id =  Sitecore.Data.ID.NewID;
+     ID id =  Sitecore.Data.ID.NewID;
      ID interactionId =  Sitecore.Data.ID.NewID;
      ID contactId =  Sitecore.Data.ID.NewID;
     
@@ -66,6 +67,7 @@ The following code assigns the Sales Lead outcome to a contact visiting the site
     var outcome = new ContactOutcome(outcomeId, outcomeDefinitionId, contactId);
     
     Tracker.Current.RegisterContactOutcome(outcome);
+```
 
 When you start assigning Outcomes to contacts you can then use the Experience Profile to drill down and view the Outcomes the user has triggered.
 

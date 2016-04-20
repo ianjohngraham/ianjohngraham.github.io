@@ -29,9 +29,9 @@ This is what he came up with and it worked a treat. I've used this on a few glob
 
 The commandlet is really easy to use. Here's an example of how I created all 10 languages by pasting this one line into the Sitecore Powershell Console:
 
-
-Add-ItemLanguage -Path &quot;master:\sitecore\content&quot; -Language &quot;en&quot; -TargetLanguage &quot;de-AT&quot;,&quot;de-de&quot;,&quot;en-za&quot;,&quot;fi-fi&quot;,&quot;fr-be&quot;,&quot;it-it&quot;,&quot;pl-pl&quot;,&quot;ru-ru&quot;,&quot;sv-se&quot;,&quot;fr-fr&quot; -IfExist OverwriteLatest  -IgnoredFields &quot;&quot;
-
+``` powershell
+   Add-ItemLanguage -Path "master:\sitecore\content" -Language "en" -TargetLanguage "de-AT","de-de","en-za","fi-fi","fr-be","it-it","pl-pl","ru-ru","sv-se","fr-fr" -IfExist OverwriteLatest  -IgnoredFields ""
+```
 Hope this is useful!
 
 Ian

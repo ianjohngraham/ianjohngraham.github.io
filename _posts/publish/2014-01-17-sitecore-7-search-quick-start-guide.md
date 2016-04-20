@@ -16,6 +16,7 @@ The example assumes you already have your Sitecore 7 instance  running, be it w
 ![Template designer](http://coreblimey.azurewebsites.net/wp-content/uploads/2014/01/templatedesign2.jpg)
 
 **The Basics**
+
 Firstly, I put together a Person class that will hold the properties of the person. This entity can be used  to map fields in your index to strongly typed properties using the *IndexField* attribute. The *IndexField* attribute names must match the name of the fields in your index.
 
 This class also contains a *Fields* property. I've set this up so that the properties of the class can be accessed with an indexer, which is useful if you need to get access to the fields dynamically using an *Aggregate* statement in Linq.
@@ -80,7 +81,7 @@ using System.Collections.Generic;
 ```
 
 
-Sitecore 7 Search allows you to use Linq to perform your search queries and uses the [IQueryable<T> interface](http://msdn.microsoft.com/en-us/library/system.linq.iqueryable%28v=vs.110%29.aspx). Let's plug the Person Entity class into some Linq and start using the *IQueryable*.
+Sitecore 7 Search allows you to use Linq to perform your search queries and uses the <a href="http://msdn.microsoft.com/en-us/library/system.linq.iqueryable%28v=vs.110%29.aspx">IQueryable</a> interface. Let's plug the Person Entity class into some Linq and start using the *IQueryable*.
     
 
 ``` csharp
@@ -90,24 +91,25 @@ Sitecore 7 Search allows you to use Linq to perform your search queries and uses
     }
 ```
 
-So with a single line of code I've set up an *IQueryable<Person>* where the firstname is John.  Well, apart from the using statement; - any Sitecore 7 searching has to be done inside a context.
+So with a single line of code I've set up an *IQueryable&lt;Person&gt;* where the firstname is John.  Well, apart from the using statement; - any Sitecore 7 searching has to be done inside a context.
     
 Note, I haven't actually called upon the index yet; this is the next step...
     
 ``` csharp
-
 query.GetResults();
 ```
 
 One line again! Sitecore 7 gives you the *GetResults()*  method on the *IQueryable*. This will then translate the predicates, that you specified using Linq, into actual query language that can be executed on your index. The *GetResults()* method saves you a lot of time and creates an object that contains all the things you need for search results rendering e.g. number of items found, relevancy scoring of items.
     
 
-When you have called the* GetResults* method, take a look in the *search.log* file in your Sitecore data folder. In here you'll find the actual query that Sitecore uses behind the scenes to query the index. This is invaluable  for debugging search queries, particularly as Sitecore hides a lot of the complexities of searching.
+When you have called the *GetResults* method, take a look in the *search.log* file in your Sitecore data folder. In here you'll find the actual query that Sitecore uses behind the scenes to query the index. This is invaluable  for debugging search queries, particularly as Sitecore hides a lot of the complexities of searching.
     
-    **Predicate Builder**
-    This feature is slightly hidden away, but really useful for adding dynamic values in your search. The predicate builder allows you to create more complex queries using *AND* and *OR* and it generates complex <a title="Expression Trees" href="http://msdn.microsoft.com/en-us/library/bb397951.aspx" target="_blank">Expression trees</a> without having to know about their inner workings.
+**Predicate Builder**
+
+
+This feature is slightly hidden away, but really useful for adding dynamic values in your search. The predicate builder allows you to create more complex queries using *AND* and *OR* and it generates complex <a title="Expression Trees" href="http://msdn.microsoft.com/en-us/library/bb397951.aspx" target="_blank">Expression trees</a> without having to know about their inner workings.
     
-    When performing a search I only wanted to search Sitecore items with a particular template and these specific templates needed to be dynamic - cue *PredicateBuilder*:
+When performing a search I only wanted to search Sitecore items with a particular template and these specific templates needed to be dynamic - cue *PredicateBuilder*:
     
 
 ``` csharp
@@ -122,10 +124,10 @@ Firstly I create a list of Sitecore IDs  called *TemplateRestrictions* which co
     
 Next I  use the predicate instead of a *Linq* expression. Note that I'm using *Filter* instead of *Where*. The main difference between these two methods is that *Filter* doesn't calculate relevancy, so if you are doing any other queries the scoring will not be affected.
     
-    **Faceting**
+**Faceting**
   
 ``` csharp
-             // Apply facets to query
+                    // Apply facets to query
                     if (Facets.Any())
                     {
                         // Go through and set up facets on the IQueryable 
@@ -133,13 +135,13 @@ Next I  use the predicate instead of a *Linq* expression. Note that I'm using *
                     }
 ```
 
-When you *facetOn* an *IQueryable,* Sitecore will instruct the search technology to apply faceting on the fields you have selected. In the above example I've used an Aggregate again (because I like one liners - but you could use a *foreach*) to go through a list of index field names  and call *facetOn* on the *IQueryable*.
+When you *facetOn* an *IQueryable*, Sitecore will instruct the search technology to apply faceting on the fields you have selected. In the above example I've used an Aggregate again (because I like one liners - but you could use a *foreach*) to go through a list of index field names  and call *facetOn* on the *IQueryable*.
     
-When you have executed the search using the *GetResults()* method, Sitecore returns a *SearchResults<Person> *object* , *which has a *Hits* collection and a* Facets.Categories* list property. You can loop through this list to get all the facet information about the selected fields.
+When you have executed the search using the *GetResults()* method, Sitecore returns a *SearchResult&lt;Person&gt;* object , which has a *Hits* collection and a *Facets.Categories* list property. You can loop through this list to get all the facet information about the selected fields.
 
 
 ``` csharp
-           List<FacetCategory> facetCategories = peopleResults.Facets.Categories;
+                List<FacetCategory> facetCategories = peopleResults.Facets.Categories;
                 foreach (var category in facetCategories)
                 {
                     outputBuilder.Append("<p><b>Facet Category Name: </b>" + category.Name + "<p/>");
@@ -156,6 +158,8 @@ When you have executed the search using the *GetResults()* method, Sitecore retu
 This makes it really easy to construct search interfaces that rely on faceting and you can give your users a great experience by telling them exactly how many of each value are in the search results.
     
 **Putting it all together...**
+
+
 Here's a full example of the People Search using the Person Entity a PeopleSearch business class and some code to write out the results.
     
 **Person class**

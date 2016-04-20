@@ -104,7 +104,6 @@ So, I've put together some rough-and- ready sample code  below using computed i
 To get this to run, all you have to do is find the Computed Index Fields section in the indexes.config file, specify the  assembly and type of the ComputedIndex field code and jobs a good'un.  Then when you push an item into your search index, the computed field code will run and create a special field with your DMS categories.
 
 ``` xml
-
  <field fieldName="dmscategories" returnType="stringCollection">Coreblimey.Business.Search.ComputedFields.DMSComputedField,Coreblimey.Business</field>
 ```
 
