@@ -34,14 +34,8 @@ GLOBAL STYLES
 }
 
 .side-bar {
-
     float:right;
-    position: relative;
-    border: 1px solid red;
-    width: 269px;
-    top: 10px;
-    vertical-align:top;
-
+    @include container(800px);  
 }
 
 
@@ -67,9 +61,9 @@ HEADER STYLING
 ***************/
 
 .header {
-	height: 15em;
+	height: 17em;
 	position: relative;
-	padding-bottom: 2em;
+	padding-bottom: 3em;
 
 	.container {
 		position: relative;
@@ -83,8 +77,7 @@ HEADER STYLING
 	h1 {
 		font-size: 3em;
 		line-height: 1;
-		letter-spacing: -3px;
-		padding-left: 0;
+		letter-spacing: -3px; 
 	}
 
 	nav {

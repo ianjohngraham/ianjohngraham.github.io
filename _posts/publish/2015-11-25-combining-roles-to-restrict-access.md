@@ -22,7 +22,7 @@ I tried setting up the Security Editor and couldn't find a way to do this. So I 
 On further reading I came across this statement:
 
 *"When a security account has been assigned several roles, the access rights that the different roles possess are added together. The security account is therefore assigned the accumulated access rights of all the roles that it is a member of.*
-* However, if a security account is assigned two roles and one of the roles is denied a specific access right to an item and the other role is granted this access right to the same item, the access right is denied for this security account. In other words, deny always overrules grant when access rights are accumulated".*
+*However, if a security account is assigned two roles and one of the roles is denied a specific access right to an item and the other role is granted this access right to the same item, the access right is denied for this security account. In other words, deny always overrules grant when access rights are accumulated"*.
 
 So in short, using the Security Editor Sitecore will only apply permissions on an OR basis and not on an AND basis - so I couldn't achieve the requirement using a simple set up in the Security editor.
 

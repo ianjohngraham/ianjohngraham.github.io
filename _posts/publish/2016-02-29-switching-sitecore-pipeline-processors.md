@@ -13,7 +13,8 @@ tags: []
 
 Being able to turn these processors on and off or run a different implementation per site becomes helpful when housing completely different solutions in one instance. Here's an example..
 
-**Mean Beans**
+## Mean Beans
+
 In this example I'll use the fictional company called Mean Beans group. They sell their canned beans all over the world, but as a group they consist of very different businesses. For example in the UK and France they only sell original Mean Beans but in the U.S they only sell beans with sausages, technically the European businesses and the U.S business use very different content and they both can be described as different brands.
 
 The UK and French sites have been established for many years and they are set up in sitecore with a few customisations. But now the board members of Mean beans international want the US site to fit inside the existing Sitecore instance, but they want the new site to use standard Sitecore functionality. Time to do some investigation to see if this is possible..
@@ -46,7 +47,7 @@ So how do we set this up? We can simply put some mappings in our config when dec
      </processor>
 ```
 
-**Processor Parameters**
+## Processor Parameters
 A cool feature of pipeline processors is that you can pass parameters to them in config. To make this work you simply need to add a method to your processor to parse the xml parameters.
 
 ``` csharp
@@ -74,7 +75,8 @@ However we need to identify when a user is requesting the U.S site or the UK sit
 
 
 You can add custom properties to these config nodes and then read them using the *SiteInfo* class.
-``` csharp
+
+``` csharp   
 var siteInfo = Sitecore.Context.Site.SiteInfo;
 siteInfo.Properties[Site.Brand];
 ```
