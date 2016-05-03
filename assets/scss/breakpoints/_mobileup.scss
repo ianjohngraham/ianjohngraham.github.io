@@ -71,7 +71,8 @@ MENU STYLING
 	  width: 100%;
 	  display: block;
 	  list-style: none;
-
+      padding-left:50px;
+       
 		li {
 		  width: 100%;
 		  display: block;
@@ -176,7 +177,7 @@ HEADER STYLING
 
 .header {
 	
-	background-image: url('../img/bert.jpg');
+	//background-image: url('../img/bert.jpg');
 	background-size: cover;
 	background-position: center center;
 	color: white;
