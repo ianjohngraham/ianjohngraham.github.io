@@ -25,11 +25,11 @@ If you dont know what a branch template or what data sourcing of renderings is t
 
 So the logical thing to do here is to set up the data source on the the rendering in the branch template to be relative to the branch template like this:
 
-<img src="/assets/img/branchdatasource.jpg" alt="news data source" />
+<img src="../img/branchdatasource.jpg" alt="news data source" />
 
 Then when the new site is created from the branch template you'd expect the data source to be magically rewritten for the new site like this:
 
-<img src="/assets/img/newitemdatasource.jpg" alt="news data source" />
+<img src="../img/newitemdatasource.jpg" alt="news data source" />
 
 Well, this doesn't happen with branch templates so some further customising needed to be done..
 
