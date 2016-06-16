@@ -1,7 +1,7 @@
 title: Core Blimey! - Sitecore Blog   
 description: Ian Graham's Sitecore Development Blog  
 
-url: http://ianjohngraham.github.io
+url: http://www.coreblimeysitecore.com
 baseurl: ""
 paginate_path: "blog/page:num/"
 permalink: blog/:title/
