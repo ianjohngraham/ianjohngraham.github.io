@@ -109,7 +109,7 @@ sitecore\ServicesAPI
 
 I then denied this user account access to a page. You'll see how this is relevant shortly.
 
-<img src="/assets/img/restrict_about.png" alt="restrict about" />
+<img src="/assets/img/restrict_about.PNG" alt="restrict about" />
 
 
 <h2>Fire up Postman</h2>
@@ -133,7 +133,7 @@ The API now returns a token rather than setting a cookie.
 
 So lets take a look at this token. We can actually use the JWT debug tool to verify the token.
 
-<img src="/assets/img/jwtverify.png" alt="no auth" />
+<img src="/assets/img/jwtverify.PNG" alt="no auth" />
 
 If we add this token to the header of the call we did previously:
 
