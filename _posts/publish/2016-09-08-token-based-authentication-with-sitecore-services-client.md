@@ -30,7 +30,7 @@ With the release of Sitecore 8.2 the under lying architecture has had a bit of a
 The API still consists of 2 mains parts the ItemService and the EntityService. In this post I'll be focussing on the ItemService.
 
 
-The ItemService provides a single HTTP endpoint and API to interact with Sitecore items over HTTP.
+The ItemService provides a single HTTP endpoint an API to interact with Sitecore items over HTTP.
 Sitecore.Services.Client ships with routes predefined to interact with the ItemService, and you do not
 need to do any server-side development to use the ItemService.
 
@@ -47,7 +47,9 @@ and the API returns json:
 
 This is all well and good but if we have remote clients using this service then we'd need to secure the API calls appropriately.
 
-Prior to Sitecore 8.2 if you needed to secure the requests this would only be possible via cookies. This mechanism may be fine for other remote websites, but for other system this may present a problem. Token-based authorization simplifies the process and the authorization can be stateless and falls in line with API best practice.
+Prior to Sitecore 8.2 if you needed to secure the requests this would only be possible via cookies.
+
+This mechanism may be fine for other remote websites, but for other system this may present a problem. Token-based authorization simplifies the process and the authorization can be stateless and falls in line with API best practice.
 
 <h2>JWT Tokens</h2>
 Sitecore's implmentation of token based authorization uses the Jwt Web tokens API.
@@ -82,6 +84,7 @@ Still in Sitecore.Services.Client.config, find the <API> tag and add the followi
 ```
 
 Then you need to add a new connection string in your ConnectionStrings.config file and specify a secret key.
+
 Please don't use this one below. Note you have to have "key=" in there in order for it to work.
 
 ```xml
@@ -91,6 +94,7 @@ Please don't use this one below. Note you have to have "key=" in there in order 
 
 <h2>Testing it out</h2>
 Now you should all be set to start using authorization. However in order to test it we have to set up some security restrictions.
+
 By default the security is set up with the policy - Sitecore.Services.Infrastructure.Web.Http.Security.ServicesLocalOnlyPolicy
 
 This means that if you are calling the API locally then you will always will have access and there will be no security checks.
@@ -131,7 +135,7 @@ So lets take a look at this token. We can actually use the JWT debug tool to ver
 
 <img src="/assets/img/jwtverify.png" alt="no auth" />
 
-If we add this token to the call we did previously:
+If we add this token to the header of the call we did previously:
 
 <img src="/assets/img/postman_auth_with_token.PNG" alt="auth" />
 
