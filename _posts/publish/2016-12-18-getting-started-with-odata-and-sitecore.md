@@ -165,7 +165,7 @@ To check all is  well in DI land head over so the services config and check to s
 
 Let's check this URL: /sitecore/admin/showservicesconfig.aspx
 
-<img src="/assets/img/registered.png" alt="registered" />
+<img src="/assets/img/registered.PNG" alt="registered" />
 
 Hurray!!
 
@@ -174,15 +174,15 @@ I always like to use Postman for testing API's, so here's a few tests
 
 Lets start by checking the meta data for the service to see if we have the right data:
 
-<img src="/assets/img/metadata.png" />
+<img src="/assets/img/metadata.PNG" />
 
 Now let's add some oData filters
 
-<img src="/assets/img/test1.png" />
+<img src="/assets/img/test1.PNG" />
 
 So far so good!
 
-<img src="/assets/img/test2.png" />
+<img src="/assets/img/test2.PNG" />
 
 Wow!! The possibilities are endless now!!
 
