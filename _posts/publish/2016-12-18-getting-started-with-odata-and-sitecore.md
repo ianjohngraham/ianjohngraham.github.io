@@ -5,11 +5,11 @@ date: 2016-12-18 13:08
 author: admin
 comments: true
 categories: [Sitecore]
-tags: []
+tags: [OData]
 ---
 
 <span class="dropcap">R</span>ecently I have been working with Web API controllers in a Sitecore 8.2 project and wanted to run these using Web API attribute routing.
-Following some <a href="http://kamsar.net/index.php/2014/05/using-web-api-2-attribute-routing-with-sitecore/instructions" target="_new"> instructions from Kamsar</a> I suddenly got a YSOD complaining about
+Following some <a href="http://kamsar.net/index.php/2014/05/using-web-api-2-attribute-routing-with-sitecore/" target="_new"> instructions from Kamsar</a> I suddenly got a YSOD complaining about
 "A route named 'MS_attributerouteWebApi' is already in the route collection".
 
 After a bit of investigation and it turns out the `Sitecore.Services.Infrastructure.Web.Http.HttpConfigurationBuilder` class now calls `config.MapHttpAttributeRoutes()`- so you don't need to any more.
