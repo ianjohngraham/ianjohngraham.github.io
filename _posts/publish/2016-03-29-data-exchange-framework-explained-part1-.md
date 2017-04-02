@@ -44,7 +44,7 @@ On an endpoint you can set up all the settings you'll need to extract the data f
 
 For example on the following I've set up the access key needed for the Dropbox api and the root path in Dropbox and the name of the application.
 
-<img src="/assets/img/endpoint.PNG" />
+<img src="/assets/img/Endpoint.PNG" />
 
 To facilitate the loading of this data to the exchange process you need to write an implementation of an Endpoint Converter.
 
@@ -163,7 +163,7 @@ The pipeline consist of 3 steps:
 Allows you to set what will be the new template for the Sitecore item. 
 In our case this will be an Unversioned Image.
 
-It also allows you to specify the Value Accessor that will provide the value for the Name of the Sitecore and a unique Id for matching an existing Sitecore item.
+It also allows you to specify the Value Accessor that will provide the value for the Name of the Sitecore and a unique id for matching an existing Sitecore item.
 
 **Apply Mapping**
 
