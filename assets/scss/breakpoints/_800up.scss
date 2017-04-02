@@ -25,6 +25,11 @@ GLOBAL STYLES
 		transform-origin: bottom left; 
 	}
 }
+ 
+.mvp-logo {
+
+     display:none;
+}
 
 .container {
 	@include container(800px); 
