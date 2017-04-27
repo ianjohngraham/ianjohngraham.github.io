@@ -83,6 +83,22 @@ Still in Sitecore.Services.Client.config, find the <API> tag and add the followi
 </tokenSecurity>
 ```
 
+Or better still add a patch file to add the settings like so:
+
+```xml
+   <configuration>
+       <sitecore>
+          <api>
+	         <tokenSecurity> 
+                <signingProvider type="sitecore.services.infrastructure.sitecore.security.symetrickeysigningprovider, sitecore.services.infrastructure.sitecore">
+                  <param desc="connectionstringname">sitecore.services.token.securitykey</param> 
+                </signingProvider>
+           </tokenSecurity>
+          <api>
+       </sitecore>
+     </configuration>
+```
+
 Then you need to add a new connection string in your ConnectionStrings.config file and specify a secret key.
 
 Please don't use this one below. Note you have to have "key=" in there in order for it to work.
