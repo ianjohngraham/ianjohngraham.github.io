@@ -89,7 +89,7 @@ Or better still add a patch file to add the settings like so:
    <configuration>
        <sitecore>
           <api>
-	         <tokenSecurity> 
+	       <tokenSecurity> 
                 <signingProvider type="sitecore.services.infrastructure.sitecore.security.symetrickeysigningprovider, sitecore.services.infrastructure.sitecore">
                   <param desc="connectionstringname">sitecore.services.token.securitykey</param> 
                 </signingProvider>
