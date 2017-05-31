@@ -39,7 +39,7 @@ SXA featured in a few talks on day 1 of the conference. I only got to go to one 
 
 We were shown some impressive drag drop and wire framing capabilities and the creative exchange import and export facility.
 
-<img src="/assets/img/optimise.JPG" alt="optimise" />
+<img src="/assets/img/optimise.jpg" alt="optimise" />
 
 I can see how this concept would appeal to content editors and user experience experts during a Sitecore build. But whether this would suit backend and front developers is another thing.
 The idea of being restricted to a grid system and set content architecture may be a turn-off for some.
