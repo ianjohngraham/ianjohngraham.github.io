@@ -27,7 +27,7 @@ Armed with their Sitecore robot, <a href="https://www.youtube.com/watch?v=DXGhPb
 
 <img src="/assets/img/IMG_0392.JPG" alt="robbie the Robert" />
 
-Then came the breakout sessions with more of an in depth look at Microsoft Cognitive Services. From Mark Stiles's session on Integration with Microsoft Cognitive Services to Robert Hock's and Alex Van Wolferen's session on the <a href="https://dev.botframework.com/" target="_new">Microsoft Bot Framework</a>.
+Then came the breakout sessions with more of an in depth look at Microsoft Cognitive Services. From Mark Stiles's session on Integration with Microsoft Cognitive Services to Robbert Hock's and Alex Van Wolferen's session on the <a href="https://dev.botframework.com/" target="_new">Microsoft Bot Framework</a>.
 
 <img src="/assets/img/IMG_0342.JPG" alt="Cognitive services" />
 
