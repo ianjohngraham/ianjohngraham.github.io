@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Reflections on SUGCON 2017"
-date: 2017-03-29 13:08
+date: 2017-05-26 13:08
 author: admin
 comments: true
 categories: [Sitecore,SUGCON]
