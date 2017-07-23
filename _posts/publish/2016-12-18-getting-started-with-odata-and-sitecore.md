@@ -158,6 +158,19 @@ We register the api controllers and the repository using a Configurator.
        }
    }
 ```
+This then needs to be registered with some config like so:
+
+```xml
+
+<?xml version="1.0"?>
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+  <sitecore>
+    <services>
+      <configurator type="OData.SitecoreExample.TestConfigurator, OData.SitecoreExample" />
+    </services>
+  </sitecore>
+</configuration>
+```
 
 As you can see this looks similar to other DI frameworks. All the class needs to do is inherit from `IServicesConfigurator` and Sitecore takes care of the rest.
 
