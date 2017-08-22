@@ -12,6 +12,7 @@ tags: [DXF]
 This post delves a bit deeper and shows you some of the code that I've used.
 
 <!-- more -->
+
 <h2>A recap</h2>
 As you may already know, the Sitecore Data Exchange framework (DEF) is a module that provides a framework for getting data in and out of Sitecore.
 It's rapidly becoming Sitecore's preferred approach when integrating an external system. 
