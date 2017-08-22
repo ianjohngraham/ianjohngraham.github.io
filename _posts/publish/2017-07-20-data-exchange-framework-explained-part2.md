@@ -9,7 +9,7 @@ tags: [DXF]
 ---
 
 <span class="dropcap">A</span> few months back I wrote a post on the Data Exchange framework and how you set up the Sitecore items for the whole ETL process.
-This post delves a bit deeper and shows you some of the code that I've used.                                        
+This post delves a bit deeper and shows you some of the code that I've used. Hopefully this will get you up and running with the framework a bit quicker.
 
 <!-- more -->
 
