@@ -208,7 +208,7 @@ This is a feature that the Sitecore Provider provides, and can be achieved by us
 The Pipeline Step item provides options for you to specify the unique identifier, the template, the naming convention and the parent item for each item.
 This processoor will try to find a match to an existing Sitecore item using the unique identifer specified and will create a new item if it doesn't exist.
 
-<img src="/assets/img/resolving.PNG" alt="resolving" />
+<img src="/assets/img/Resolving.PNG" alt="resolving" />
 
 
 <h2>Mapping</h2>
