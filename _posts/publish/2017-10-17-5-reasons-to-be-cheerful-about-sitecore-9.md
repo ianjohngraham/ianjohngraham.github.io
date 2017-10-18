@@ -58,7 +58,7 @@ xConnect opens up a world of possibilities and you can finally start using the d
 
 You can finally write that app to view customer data, have call center staff feed data back to the website or have a beacon record a visit to a store!
 
-<img src="/assets/img/xconnectoverview.PNG" alt="xConnectOverview" />
+<img src="/assets/img/xconnectoverview.png" alt="xConnect Overview" />
 
 For example, if you wanted to get all the facet data about a particular contact it only takes a few lines of code:
 
