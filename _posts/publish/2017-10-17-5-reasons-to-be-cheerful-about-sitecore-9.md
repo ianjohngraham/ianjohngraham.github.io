@@ -48,7 +48,7 @@ The focus on headless comes twofold with the release of xConnect and more enhanc
 SSC has been enhanced with the ability to create an oData REST service and API key management for securing access to APIs. 
 This is perfect if you're using JavaScript libraries such as React or Vue and need to easily pull data from Sitecore.
 
-Though biggest headless contribution in this release though is definitely xConnect. 
+The biggest headless contribution in this release though is definitely xConnect. 
 
 <h2>3. xConnect</h2>
 We've been hearing about xConnect for over a year now and it's finally arrived! 
