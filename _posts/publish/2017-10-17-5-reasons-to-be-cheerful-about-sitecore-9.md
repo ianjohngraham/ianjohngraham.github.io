@@ -57,7 +57,43 @@ In a nutshell, xConnect is a Framework of APIs that allow you to read and write 
 xConnect opens up a world of possibilities and you can finally start using the data that Sitecore is storing to make great experiences for the user.
 
 You can finally write that app to view customer data, have call center staff feed data back to the website or have a beacon record a visit to a store!
-xConnect is also very well documented, thanks to Martina Welander, and it shouldn't be a case of feeling your way round in the dark any more to get up to speed.
+
+For example, if you wanted to get all the facet data about a particular contact it only takes a few lines of code:
+
+``` csharp
+
+    using (XConnectClient client = Sitecore.XConnect.Client.Configuration.SitecoreXConnectClientConfiguration.GetClient())
+    {
+        try 
+        {
+            var contactsTask = client.GetAsync<Sitecore.XConnect.Contact>(new ContactReference(new Guid("{A2814105-1F45-E611-52E6-34E6D7117DCB}")),
+            new ContactExpandOptions().Expand<EmailAddressList>());
+
+            Contact contact = await contactsTask;
+
+            if (contact != null)
+            {
+               // For each contact, retrieve the facet - will return null if contact does not have this facet set
+               EmailAddressList emailsFacetData = contact.GetFacet<EmailAddressList>();
+
+               if (emailsFacetData != null)
+               {
+                  // Do something with data - e.g. display in view
+                  EmailAddress preferred = emailsFacetData.PreferredEmail;
+               }
+            }
+        }
+        catch (XdbExecutionException ex)
+        {
+            // Handle exceptions
+        }
+    }
+```
+
+
+xConnect is also <a href="https://doc.sitecore.net/developers/xp/xconnect/" target="_new">very well documented</a>, thanks to Martina Welander, and it shouldn't be a case of feeling your way round in the dark any more to get up to speed.
+
+
 
 <h2>4. Forms</h2>
 We've been hearing about the promise of new forms for some time and although WFFM is very useful the world of forms has moved on.
