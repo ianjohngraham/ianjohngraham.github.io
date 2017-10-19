@@ -5,7 +5,7 @@ date: 2017-10-17 13:08
 author: admin
 comments: true
 categories: [Sitecore,Sitecore 9]
-tags: [Sitecore]
+tags: [Sitecore, Sitecore 9]
 ---
 
 <span class="dropcap">T</span>his year I've been unable to attend the Symposium..sob.sob. So feeling sad about it I decided to cheer myself up with a look at the technical preview of Sitecore 9 before it's official release.
@@ -18,7 +18,7 @@ Here's 5 great things to be cheerful about in Sitecore 9.
 So first things first lets get it installed! Here's the biggest difference compared to other versions of Sitecore. 
 It's not as simple as extracting the web root, attaching some databases and adding a site to IIS;
 
-Sitecore 9 comes with a totally rethink on xDB and all the low level functions take place in a separate IIS website. 
+Sitecore 9 comes with a total rethink on xDB and all the low level functions take place in a separate IIS website. 
 Along with the new site, windows services, extra databases, Solr and self signed SSL certificates are needed. 
 Although you might think this a P.I.T.A it gives you the ability to scale out xDB and untangle it from the main content editing experience.
 
@@ -38,7 +38,7 @@ But for those who are used to S.I.M or not that familiar with Powershell it coul
 
 
 <h2>2. Headless</h2>
-So why all this redeisgn? Well, the main reason is the focus on "headless" in this release.
+So why all this redesign in Sitecore 9? Well, the main reason is the focus on "headless" in this release.
 
 With a more headless architecture we have the ability to push aside the presentation layer in Sitecore and access the all important data that Sitecore is using.
 
@@ -54,9 +54,9 @@ The biggest headless contribution in this release though is definitely xConnect.
 We've been hearing about xConnect for over a year now and it's finally arrived! 
 In a nutshell, xConnect is a Framework of APIs that allow you to read and write analytics data to xDB. 
 
-xConnect opens up a world of possibilities and you can finally start using the data that Sitecore is storing to make great experiences for the user.
+xConnect opens up a world of possibilities. You can finally start using the data that Sitecore is storing to make great experiences for the user.
 
-You can finally write that app to view customer data, have call center staff feed data back to the website or have a beacon record a visit to a store!
+You can write that app to view customer data, have call center staff feed data back to the website or have a beacon record a visit to a store!
 
 <img src="/assets/img/xconnectoverview.png" alt="xConnect Overview" />
 
@@ -111,8 +111,8 @@ The analytics data can also be viewed inline in the performance tab and there's 
 <h2>5. Dynamic Placeholders</h2>
 Finally one of the most requested features by the Sitecore community has been implemented!
 
-When working with placeholders in Sitecore you can get your self into a situation where you have a Rendering with a placeholder on it that you need to resuse in multiple places on the page.
-Because the keys for the placeholders are static and not dynamic this becomes a problem. 
+When working with Placeholders you can get your self into a situation where you have a Rendering with a Placeholder on it that you need to resuse in multiple places on the page.
+Because the keys for the Placeholders are static and not dynamic this becomes a problem. 
 
 Sitecore 9 contains a new extension method you can use in the <i>SitecoreHelper</i> class to enable unique keys for your placeholders each time they are used on the page.
 
