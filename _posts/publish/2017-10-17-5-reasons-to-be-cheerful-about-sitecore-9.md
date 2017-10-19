@@ -6,6 +6,7 @@ author: admin
 comments: true
 categories: [Sitecore,Sitecore 9]
 tags: [Sitecore, Sitecore 9]
+description: "5 key features of Sitecore 9"
 ---
 
 <span class="dropcap">T</span>his year I've been unable to attend the Symposium..sob.sob. So feeling sad about it I decided to cheer myself up with a look at the technical preview of Sitecore 9 before it's official release.
