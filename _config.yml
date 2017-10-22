@@ -8,7 +8,7 @@ permalink: blog/:title/
 
 
 highlighter: rouge
-gems: [jekyll-paginate,jekyll-sitemap]
+gems: [jekyll-paginate,jekyll-sitemap,jekyll-seo-tag]
 paginate: 5
 
 
