@@ -6,8 +6,9 @@ baseurl: ""
 paginate_path: "blog/page:num/"
 permalink: blog/:title/
 
+
 highlighter: rouge
-gems: [jekyll-paginate]
+gems: [jekyll-paginate,jekyll-sitemap]
 paginate: 5
 
 
@@ -26,3 +27,4 @@ google_analytics: "UA-77848034-1"
 
 sass:
         sass_dir: _sass
+ 
