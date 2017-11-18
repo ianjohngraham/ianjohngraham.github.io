@@ -94,7 +94,7 @@ In production you'll have a full blown certificate with the proper authority.
 Simply adding one setting changed everything!
 
 
-<img src="/assets/img/oData.PNG"/>
+<img src="/assets/img/Odata.PNG"/>
 
 Now, we can perform some queries via the URL.
 
@@ -113,7 +113,7 @@ So it worked in my browser what about PowerBI?
 
 Hmm no dice.
 
-<img src="/assets/img/PowerBI.PNG"/>
+<img src="/assets/img/powerbi.PNG"/>
 
 Unfortunately Power BI doesn't support client certificate authentication. 
 However we can handle that via a proxy!
