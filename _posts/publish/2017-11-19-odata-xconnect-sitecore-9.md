@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Using PowerBI with xConnect in Sitecore 9"
+title: "Using Power BI with xConnect in Sitecore 9"
 date: 2017-11-17 13:08
 author: admin
 comments: true
@@ -8,7 +8,7 @@ categories: [Sitecore,Sitecore 9]
 tags: [Sitecore, Sitecore 9,xConnect, Node.js]
 ---
 
-<span class="dropcap">T</span>his post gives you an overview of how I got the xConnect oData API working and pulled data from it into PowerBI. 
+<span class="dropcap">T</span>his post gives you an overview of how I got the xConnect oData API working and pulled data from it into Power BI. 
 <!-- more -->
 
 <h2>The oData API </h2>
@@ -19,7 +19,7 @@ At the heart of the service layer is an oData REST api that enables the communic
 <img src="/assets/img/xconnect-advanced.PNG"/>
 
 This is great because it is a standardised means of data access and we potentially dont have to write our own REST service to expose xDB to other systems.
-So I thought I'd give this a try and bring some data from xConnect into <a href="https://powerbi.microsoft.com/en-us/" target="_new">PowerBI</a>.
+So I thought I'd give this a try and bring some data from xConnect into <a href="https://Power BI.microsoft.com/en-us/" target="_new">Power BI</a>.
 
 <h2>How do we access the oData Endpoint?</h2>
 The documentation says we can access the meta data for oData service by using the following URL: https://[xconnecthost]:[port]/odata/$metadata 
@@ -103,13 +103,13 @@ Now, we can perform some queries via the URL.
 <img src="/assets/img/interactions.PNG"/>
 
 
-<h2>Taking it to PowerBI</h2>
+<h2>Taking it to Power BI</h2>
 
-PowerBI is an analytics tool offering from Microsoft and fortunately it takes oData services as it's data source.
+Power BI is an analytics tool offering from Microsoft and fortunately it takes oData services as it's data source.
 
-Here I'm using PowerBI desktop.
+Here I'm using Power BI desktop.
 
-So it worked in my browser what about PowerBI? 
+So it worked in my browser what about Power BI? 
 
 Hmm no dice.
 
@@ -148,23 +148,23 @@ Let's fire up the proxy and try it with Power BI.
 
 <img src="/assets/img/xconnectproxy.PNG"/>
 
-Now if we open up PowerBIs Data sources and try to connect again. We've got a connection from PowerBI to xConnect!
+Now if we open up Power BIs Data sources and try to connect again. We've got a connection from Power BI to xConnect!
 
 <img src="/assets/img/proxyresults.PNG"/>
 
-This loads the data from the feed into table-like structures that you can query in PowerBI.
+This loads the data from the feed into table-like structures that you can query in Power BI.
 The xConnect oData service gives you Interactions, Contacts and DeviceProfiles table to work with as datasources.
 
 
 <img src="/assets/img/tables.PNG"/>
 
-With a simple Measure in PowerBI we can get a break down of the user agents that have accessed our site.
+With a simple Measure in Power BI we can get a break down of the user agents that have accessed our site.
 
 <img src="/assets/img/useragents.PNG"/>
 
-This was just a simple example, but PowerBI is quite powerful and you can expand tables, make relationships between the tables and provide filters.
+This was just a simple example, but Power BI is quite powerful and you can expand tables, make relationships between the tables and provide filters.
 
-Obviously this set up is not just limited for use with PowerBI, you could even use it to allow JavaScript code to access the oData service - see this library here <a href="http://www.odata.org/blog/OData-JavaScript-library-o.js-explained/" target="_new">http://www.odata.org/blog/OData-JavaScript-library-o.js-explained/</a>
+Obviously this set up is not just limited for use with Power BI, you could even use it to allow JavaScript code to access the oData service - see this library here <a href="http://www.odata.org/blog/OData-JavaScript-library-o.js-explained/" target="_new">http://www.odata.org/blog/OData-JavaScript-library-o.js-explained/</a>
 
 That's it for now. As ever, I hope it was useful.
 
