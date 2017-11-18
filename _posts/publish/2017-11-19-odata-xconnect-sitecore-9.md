@@ -22,7 +22,7 @@ This is great because it is a standardised means of data access and we potential
 So I thought I'd give this a try and bring some data from xConnect into <a href="https://Power BI.microsoft.com/en-us/" target="_new">Power BI</a>.
 
 <h2>How do we access the oData Endpoint?</h2>
-The documentation says we can access the meta data for oData service by using the following URL: https://[xconnecthost]:[port]/odata/$metadata 
+The documentation says we can access the meta data for oData service by using the following URL: https://[xconnecthost]:[port]/odata/$metadata.
 So I've installed Sitecore 9 on my local machine using SIF and everything is good so I'll try and access that URL ..
 
 <img src="/assets/img/403.PNG"/>
