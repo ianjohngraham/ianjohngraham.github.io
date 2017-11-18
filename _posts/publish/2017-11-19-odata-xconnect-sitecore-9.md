@@ -137,7 +137,7 @@ The only hard part is changing your certificate to the pem format so that Node.j
                 };
 ```
 
-I've put together some <a hre="https://github.com/ianjohngraham/xconnect-odata-proxy">Node Js proxy code</a> that you can use.
+I've put together some <a href="https://github.com/ianjohngraham/xconnect-odata-proxy">Node Js proxy code</a> that you can use.
 The proxy allows you to specify the certifcates and also replaces the context URL in the response.
 There's full instructions on GitHub for this.
 
