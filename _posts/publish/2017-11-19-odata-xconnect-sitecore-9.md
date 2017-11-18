@@ -19,7 +19,7 @@ At the heart of the service layer is an oData REST api that enables the communic
 <img src="/assets/img/xconnect-advanced.png"/>
 
 This is great because it is a standardised means of data access and we potentially dont have to write our own REST service to expose xDB to other systems.
-So I thought I'd give this a try and bring some data from xConnect into <a href="https://Power BI.microsoft.com/en-us/" target="_new">Power BI</a>.
+So I thought I'd give this a try and bring some data from xConnect into <a href="https://powerbi.microsoft.com/en-us/" target="_new">Power BI</a>.
 
 <h2>How do we access the oData Endpoint?</h2>
 The documentation says we can access the meta data for oData service by using the following URL: https://[xconnecthost]:[port]/odata/$metadata.
@@ -65,10 +65,10 @@ In theory, Chrome should prompt me to select the certificate from my local store
 Ok, How do we fix this? First things first make sure you certifcates are in the "Trusted Certificate Authority" store. 
 
 With an install of Sitecore 9, S.I.F sets up 4 certificates: Two certificates for xConnect along with their root certificates.
-For good measure I've made sure that these certifcates are all in the "Trusted Certificate Authority" store. 
+For good measure I've made sure that these certificates are all in the "Trusted Certificate Authority" store. 
 
 
-<img src="/assets/img/certs1.PNG"/>
+<img src="/assets/img/certs.PNG"/>
 
 <img src="/assets/img/certs2.PNG"/>
 
@@ -77,7 +77,7 @@ To import the certifcates to this store you can export your certifcates in IIS a
 <img src="/assets/img/import.PNG"/>
 
 
-Ok that's done - I'll try again..still Forbidden messages. It took me a while to find this one but annoyingly there is a registry setting to add to make this work.
+Ok that's done - I'll try again..still Forbidden messages! It took me a while to find this one but annoyingly there is a registry setting to add to make this work.
 I stumbled across a Stackoverflow question where they were experiencing the same issue.
 
 <a href="https://stackoverflow.com/questions/27232340/iis-8-5-mutual-certificates-authentication-fails-with-error-403-16">https://stackoverflow.com/questions/27232340/iis-8-5-mutual-certificates-authentication-fails-with-error-403-16</a>
@@ -85,7 +85,7 @@ I stumbled across a Stackoverflow question where they were experiencing the same
 
 <img src="/assets/img/registrysetting.PNG"/>
 
-It turns out that to enable client certificate authentication to work you have to add that setting for TLS to use the Trusted Certificate Authority store.
+It turns out that to enable client certificate authentication you have to add that setting for TLS to use the Trusted Certificate Authority store.
 If this setting isn't in place the client certificate chain is performed on only certificates in the Trusted Issuer list not in the Trusted Certificate Authority store.
 
 It's always a bit unnerving for some when meddling with the registry, but this should only be applicable in development environments. 
