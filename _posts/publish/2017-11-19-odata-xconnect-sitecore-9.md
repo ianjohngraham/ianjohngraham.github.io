@@ -16,7 +16,7 @@ If you look at the <a href="https://doc.sitecore.net/developers/xp/xconnect/xcon
 
 At the heart of the service layer is an oData REST api that enables the communication between the various parts. 
 
-<img src="/assets/img/xconnect-advanced.PNG"/>
+<img src="/assets/img/xconnect-advanced.png"/>
 
 This is great because it is a standardised means of data access and we potentially dont have to write our own REST service to expose xDB to other systems.
 So I thought I'd give this a try and bring some data from xConnect into <a href="https://Power BI.microsoft.com/en-us/" target="_new">Power BI</a>.
