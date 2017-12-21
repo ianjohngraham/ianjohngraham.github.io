@@ -187,7 +187,12 @@ And here's the SPEAK dialog for passing the parameters to the Submit Action.
 
 <img src="/assets/img/speakpagedialog.PNG" />
 
+
 Hope this helps someone out. As usual please feel free to comment if you have any questions.
+
+*UPDATE*: After writing this post I've discovered something similar that Sitecore have done.
+Take a look here - <a href="https://doc.sitecore.net/sitecore_experience_platform/digital_marketing/sitecore_forms/setting_up_and_configuring/walkthrough_creating_a_custom_submit_action_that_updates_contact_details">https://doc.sitecore.net/sitecore_experience_platform/digital_marketing/sitecore_forms/setting_up_and_configuring/walkthrough_creating_a_custom_submit_action_that_updates_contact_details</a>
+
 
 
 
