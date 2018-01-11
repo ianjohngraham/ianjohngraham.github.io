@@ -62,43 +62,22 @@ So in order to access the URL a client certificate has to be presented.
 In theory, Chrome should prompt me to select the certificate from my local store. It looks like there's some issues with trust.
 
 
-Ok, How do we fix this? First things first make sure you certifcates are in the "Trusted Certificate Authority" store. 
-
-With an install of Sitecore 9, S.I.F sets up 4 certificates: Two certificates for xConnect along with their root certificates.
-For good measure I've made sure that these certificates are all in the "Trusted Certificate Authority" store. 
-
-
-<img src="/assets/img/certs.PNG"/>
-
-<img src="/assets/img/certs2.PNG"/>
-
-To import the certifcates to this store you can export your certifcates in IIS as .PFX files and import them into the Trusted Certificate Authority store.
- 
-<img src="/assets/img/import.PNG"/>
-
-
-Ok that's done - I'll try again..still Forbidden messages! It took me a while to find this one but annoyingly there is a registry setting to add to make this work.
-I stumbled across a Stackoverflow question where they were experiencing the same issue.
-
-<a href="https://stackoverflow.com/questions/27232340/iis-8-5-mutual-certificates-authentication-fails-with-error-403-16">https://stackoverflow.com/questions/27232340/iis-8-5-mutual-certificates-authentication-fails-with-error-403-16</a>
-
-
-<img src="/assets/img/registrysetting.PNG"/>
-
-It turns out that to enable client certificate authentication you have to add that setting for TLS to use the Trusted Certificate Authority store.
-If this setting isn't in place the client certificate chain is performed on only certificates in the Trusted Issuer list not in the Trusted Certificate Authority store.
-
-It's always a bit unnerving for some when meddling with the registry, but this should only be applicable in development environments. 
-In production you'll have a full blown certificate with the proper authority.
-
 Simply adding one setting changed everything!
+
+Got to the following file in your xConnect website: *yourxconnectsite/App_config/AppSettings.config*
+
+Comment out the following setting:
+
+```xml
+
+ <add key="validateCertificateThumbprint" value="53FA51C904F2B281811B44D08E86F69C324F6647" />
+ 
+ ```
 
 
 <img src="/assets/img/Odata.PNG"/>
 
 Now, we can perform some queries via the URL.
-
-<img src="/assets/img/certprompt.PNG"/>
 
 <img src="/assets/img/interactions.PNG"/>
 
@@ -108,47 +87,6 @@ Now, we can perform some queries via the URL.
 Power BI is an analytics tool offering from Microsoft and fortunately it takes oData services as it's data source.
 
 Here I'm using Power BI desktop.
-
-So it worked in my browser what about Power BI? 
-
-Hmm no dice.
-
-<img src="/assets/img/powerbi.PNG"/>
-
-Unfortunately Power BI doesn't support client certificate authentication. 
-However we can handle that via a proxy!
-
-With Node.js and the http library doing client certificate auth is quite easy.
-The only hard part is changing your certificate to the pem format so that Node.js can read them.
-
-```javascript
-
-          var httpServer = http.createServer(function(req, res) {
-             var options = {
-                  target: {
-                  host: 'localhost',
-                  port: 3002,
-                  protocol: 'https:',
-                  key: clientKey,
-                  cert: clientCert,
-                  ca: caCert,
-                },
-                changeOrigin: true
-                };
-```
-
-I've put together some <a href="https://github.com/ianjohngraham/xconnect-odata-proxy">Node Js proxy code</a> that you can use.
-The proxy allows you to specify the certifcates and also replaces the context URL in the response.
-There's full instructions on GitHub for this.
-
-You could of course do the same thing using .NET. You could use the same connection string idea that Sitecore uses to get the certificate details.
-I plan in the next month to write a .NET version based on this OWIN Middleware solution : <a href="https://github.com/SharpTools/SharpReverseProxy" target="_new">SharpReverseProxy</a>
-
-Let's fire up the proxy and try it with Power BI.
-
-<img src="/assets/img/xconnectproxy.PNG"/>
-
-Now if we open up Power BIs Data sources and try to connect again. We've got a connection from Power BI to xConnect!
 
 <img src="/assets/img/proxyresults.PNG"/>
 
