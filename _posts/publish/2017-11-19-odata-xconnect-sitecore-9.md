@@ -74,6 +74,7 @@ Comment out the following setting:
  
  ```
 
+Then recycle the App Pool!! 
 
 <img src="/assets/img/Odata.PNG"/>
 
