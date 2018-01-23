@@ -58,14 +58,13 @@ The following code assigns the Sales Lead outcome to a contact visiting the site
         DateTime = DateTime.UtcNow.Date,
         MonetaryValue = 10,
         InteractionId = interactionId
-      };
+     };
     
-      var manager = Factory.CreateObject('outcome/outcomeManager',true) as OutcomeManager;
-        manager.Save(outcome);</pre>
-    You can also trigger an Outcome for the current web session using the Tracker class.
-    <pre class="brush: csharp; gutter: true">
-    var outcome = new ContactOutcome(outcomeId, outcomeDefinitionId, contactId);
-    
+    var manager = Factory.CreateObject('outcome/outcomeManager',true) as OutcomeManager;
+    manager.Save(outcome);</pre>
+    //You can also trigger an Outcome for the current web session using the Tracker class.
+   
+    var outcome = new ContactOutcome(outcomeId, outcomeDefinitionId, contactId);    
     Tracker.Current.RegisterContactOutcome(outcome);
 ```
 
