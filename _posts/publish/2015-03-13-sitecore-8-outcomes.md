@@ -61,7 +61,7 @@ The following code assigns the Sales Lead outcome to a contact visiting the site
      };
     
     var manager = Factory.CreateObject('outcome/outcomeManager',true) as OutcomeManager;
-    manager.Save(outcome);</pre>
+    manager.Save(outcome);
     //You can also trigger an Outcome for the current web session using the Tracker class.
    
     var outcome = new ContactOutcome(outcomeId, outcomeDefinitionId, contactId);    
