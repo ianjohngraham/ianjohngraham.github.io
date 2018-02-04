@@ -51,7 +51,7 @@ The following code assigns the Sales Lead outcome to a contact visiting the site
      ID contactId =  Sitecore.Data.ID.NewID;
     
      // definition item for Sales Lead
-     var definitionId = new ID('{C2D9DFBC-E465-45FD-BA21-0A06EBE942D6}');
+     var definitionId = new ID("{C2D9DFBC-E465-45FD-BA21-0A06EBE942D6}");
     
      var outcome = new ContactOutcome(id, definitionId, contactId)
      {
@@ -60,7 +60,7 @@ The following code assigns the Sales Lead outcome to a contact visiting the site
         InteractionId = interactionId
      };
     
-    var manager = Factory.CreateObject('outcome/outcomeManager',true) as OutcomeManager;
+    var manager = Factory.CreateObject("outcome/outcomeManager",true) as OutcomeManager;
     manager.Save(outcome);
     //You can also trigger an Outcome for the current web session using the Tracker class.
    
