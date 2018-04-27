@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Right to be Forgotten in Sitecore 8"
+title: "Right to be Forgotten in Sitecore 8.0-8.1"
 date: 2018-04-26 13:08
 author: admin
 comments: true
@@ -138,6 +138,12 @@ These areas include the  core and reporting databases and the analytics search i
 To be thorough, I would recommend reviewing all the databases that Sitecore uses to be sure to know exactly what data Sitecore is storing.
 
 **Also note the contents of this post are just suggestions of how to anonymise data in Sitecore 8 and do not guarantee GDPR compliance.**
+
+**If you're using Sitecore 8.2 there's good news: 
+
+Sitecore have just released an <a href="https://dev.sitecore.net/Downloads/Sitecore_Experience_Platform/82/Sitecore_Experience_Platform_82_Update7.aspx" target="_new">Update 7</a> that supports the "Right to be Forgotten".
+
+In the next post I'll cover how to get this working!**
 
 I hope this helps. Feel free to commment if you have any questions.
 
