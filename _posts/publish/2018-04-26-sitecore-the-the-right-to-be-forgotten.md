@@ -7,7 +7,7 @@ comments: true
 categories: [Sitecore,Sitecore 9, Sitecore 8]
 tags: [Sitecore, Sitecore 9, Sitecore 8]
 ---
-You may have heard that next month <a href="https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/" target="_new">GDPR</a> legislation will be coming in. That means user's of your website will have rights over what you do with their data.
+If you're in the EU, you may have heard that next month <a href="https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/" target="_new">GDPR</a> legislation will be coming in. That means user's of your website will have rights over what you do with their data.
 They will have the ability to request that you remove any personal identifiable data you have about them.
 
 You've also probably heard about the Right to be Forgotten feature in Sitecore 9. But what do we do if we're not on Sitecore 9?
@@ -129,15 +129,14 @@ Once this code has been run for a contact, the record will be anonymous.
 
 <img src="/assets/img/mongodbstructureanon.PNG" />
 
-You could add code such as this to an admin interface to enable administrators to carry out a "Right to be forgotten" request from a web site user.
-
 <h2>Other Data</h2>
 Aside from MongoDB you also need to be aware of personal data stored in other parts of Sitecore.
 These areas include the  core and reporting databases and the analytics search indexes.
 
 To be thorough, I would recommend reviewing all the databases that Sitecore uses to be sure to know exactly what data Sitecore is storing.
 
-**Also note the contents of this post are just suggestions of how to anonymise data in Sitecore 8 and do not guarantee GDPR compliance.**
+**Also note the contents of this post are just suggestions of how to anonymise data in Sitecore 8 and does not ensure GDPR compliance in any way.
+I recommend consulting your legal teams to achieve compliance**
 
 **If you're using Sitecore 8.2 there's good news**: 
 
