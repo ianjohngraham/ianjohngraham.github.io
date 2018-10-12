@@ -42,7 +42,7 @@ There are now options for XM only deployments and a single developer template.
 
 <h2>Identity Server</h2>
 In Sitecore 9.1 authentication has had a major refactor. 
-ASP.NET memebership is legacy these days and Microsoft have introduced ASP.NET Identity so it makes sense that Sitecore should get up to date on this.
+ASP.NET membership is legacy these days and Microsoft have introduced ASP.NET Identity so it makes sense that Sitecore should get up to date on this.
 Also the ASP.NET Membership system is directly coupled to the CMS part of Sitecore and as the architecture expands it makes sense to decouple authentication to it's own centralised service.
 
 All authentication in Sitecore 9.1 is handled by a separate standalone .NET Core application. 
