@@ -48,7 +48,7 @@ Also the ASP.NET Membership system is directly coupled to the CMS part of Siteco
 All authentication in Sitecore 9.1 is handled by a separate standalone .NET Core application. 
 The .NET core app is based on the <a href="http://docs.identityserver.io/en/release/" target="_new">IdentityServer4</a> framework and supports Single Sign-On with OpenID.
 
-<img src="/assets/img/identityserver.PNG" alt="identity server" />
+<img src="/assets/img/identityserver.png" alt="identity server" />
 
 Even when you log into the Sitecore shell you have to authenticate via the IdentityServer.
 As a result the you can't go directly to /sitecore/login anymore, you have to go to /sitecore or /sitecore/admin.
@@ -93,8 +93,6 @@ Just put your API key in this config file and your're good to go.
  
  <img src="/assets/img/tagging2.PNG" alt="tagging" />
  
-<h2>Sitecore Host</h2>
-
 
 <h2>Machine Learning</h2>
 Last but not least, machine learning is finally here!
