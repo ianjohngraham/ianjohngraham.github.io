@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "What's new in Sitecore 9.1"
-date: 2018-10-15 13:08
+date: 2018-10-12 13:08
 author: admin
 comments: true
 categories: [Sitecore,Sitecore 9.1, Sitecore 9.1]
