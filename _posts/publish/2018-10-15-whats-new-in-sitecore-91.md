@@ -51,7 +51,7 @@ The .NET core app is based on the <a href="http://docs.identityserver.io/en/rele
 <img src="/assets/img/identityserver.png" alt="identity server" />
 
 Even when you log into the Sitecore shell you have to authenticate via the IdentityServer.
-As a result the you can't go directly to /sitecore/login anymore, you have to go to /sitecore or /sitecore/admin.
+As a result you can't go directly to /sitecore/login anymore, you have to go to /sitecore or /sitecore/admin.
 
 If you look under the hood of IdentityServer the tables for the ASP.NET Membership system are still there so this should make transition easier.
 
