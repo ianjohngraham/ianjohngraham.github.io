@@ -13,8 +13,6 @@ Here's some of the highlights of the release.
 
 <h2>SIF 2.0</h2>
 With the release of Sitecore 9.1 also comes the release of SIF 2.0.
-
-
 SIF 2.0 has a lot more capabilitites including the ability to install all the prerequisites  needed for your installation.
 This is a real bonus as Sitecore is now getting more complex with more dependencies. For instance, you now need .Net Core 2.1 runtime installed before installing Sitecore.
 
@@ -42,8 +40,8 @@ There are now options for XM only deployments and a single developer template.
 
 <h2>Identity Server</h2>
 In Sitecore 9.1 authentication has had a major refactor. 
-ASP.NET membership is legacy these days and Microsoft have introduced ASP.NET Identity so it makes sense that Sitecore should get up to date on this.
-Also the ASP.NET Membership system is directly coupled to the CMS part of Sitecore and as the architecture expands it makes sense to decouple authentication to it's own centralised service.
+ASP.NET membership is legacy these days and Microsoft have introduced ASP.NET Identity, so it makes sense that Sitecore should get up to date on this.
+Also the ASP.NET Membership system is directly coupled to the CMS part of Sitecore, which is not good long term as the architecture expands.
 
 All authentication in Sitecore 9.1 is handled by a separate standalone .NET Core application. 
 The .NET core app is based on the <a href="http://docs.identityserver.io/en/release/" target="_new">IdentityServer4</a> framework and supports Single Sign-On with OpenID.
@@ -101,13 +99,13 @@ The much talked about Cortex is now a reality. I won't go into great detail abou
 You can download it at here: <a href="https://my.visualstudio.com/Downloads?q=Machine%20Learning%20Server%209.3.0%20for%20Windows&pgroup=">https://my.visualstudio.com/</a>
 
 <h3>Microsoft Machine Learning Server</h3>
-Microsoft Machine learning server is an enterprise platform supports the R and Python programming language for analysing statistics.
+Microsoft Machine learning server is an enterprise platform that supports the R and Python programming languages for analysing statistics.
 Behind all the magic and wizardry of Cortex it's all about statistics, and for Sitecore to predict something for you intelligently it has to have stats.
 
 So Sitecore needs to send it's statistics for processing in Machine Learning server. 
 This is done by setting up a Web node in Machine learning server. 
 The Web Node has a REST endpoint so that analytics data can be constantly transmitted to the Machine learning server.
-In it's basic form the architecture is as follows. 
+In it's basic "One Box" configuration form the architecture is as follows but this can be scaled up and run in the cloud.
 
 <img src="/assets/img/setup-onebox.png" alt="one box config" />
 
