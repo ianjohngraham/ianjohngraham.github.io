@@ -18,7 +18,7 @@ This is a real bonus as Sitecore is now getting more complex with more dependenc
 
 You'll no longer have to keep running the Sitecore install script over and over again after realising you forgot to install something!!!!
 
-A simple Powershell call is all that's needed to install the prerequisites:
+Take a long deep breath...a simple Powershell call is all that's needed to install the prerequisites:
 
 ```powershell
  
