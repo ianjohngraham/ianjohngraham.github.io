@@ -147,7 +147,7 @@ Here's the full config you need.
 		</pipelines>
 	  </sitecore>
 	</configuration>
-```
+``` 
 
 With this in place, when you use the API to carry out operations on the cart your repository will be used.
 
